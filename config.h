@@ -39,9 +39,9 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            True,        -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       False,       -1 },
+	/* class               instance    title       tags mask     isfloating   monitor */
+	{ "Deadbeef",          NULL,       NULL,       5 << 8,       False,        -1 },
+	{ "Firefox",           NULL,       NULL,       1 << 8,       False,       -1 },
 };
 
 /* layout(s) */
@@ -59,8 +59,8 @@ static const Layout layouts[] = {
 /* key definitions */
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+	{ MODKEY|ControlMask,           KEY,      view,           {.ui = 1 << TAG} }, \
+	{ MODKEY,                       KEY,      toggleview,     {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
@@ -70,7 +70,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *cmd_dmenu[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *cmd_term[]  = { "st", NULL };
+static const char *cmd_term[]  = { "termite", NULL };
 static const char *cmd_browser[] = { "firefox", NULL, NULL, NULL, "Firefox" };
 static const char *kb_backlightdec[] = { "xbacklight", "-dec", "10", NULL };
 static const char *kb_backlightinc[] = { "xbacklight", "-inc", "10", NULL };
@@ -172,10 +172,9 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
 
-/* dwmfifo, make sure it exists */
 static const char *dwmfifo = "/tmp/dwm.fifo";
 static Command commands[] = {
-   { "dmenu",           spawn,          {.v = cmd_dmenu} },
+   { "dmenu",           spawn,          {.v = cmd_term} },
    { "term",            spawn,          {.v = cmd_term} },
    { "togglebar",       togglebar,      {0} },
    { "focusstack+",     focusstack,     {.i = +1} },
