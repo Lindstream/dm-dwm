@@ -91,7 +91,7 @@ static Key keys[] = {
 	/* Commands */
 	{ MODKEY,                       XK_space,   spawn,          {.v = cmd_dmenu } },
 	{ MODKEY|ShiftMask,             XK_Return, 	spawn,          {.v = cmd_term } },
-	{ MODKEY,			                  XK_x, 	   	runorrise,      {.v = cmd_browser } },
+	{ MODKEY,			                  XK_x, 	   	runorraise,      {.v = cmd_browser } },
 	
 	/* General */
 	{ MODKEY,                       XK_b,      	togglebar,      {0} },
@@ -161,7 +161,6 @@ static Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = cmd_term } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
