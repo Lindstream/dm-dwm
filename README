@@ -9,14 +9,14 @@ Patches
 * dwmfifo - done
   Best thing since sliced bread, this patch adds a FIFO command/controller (/tmp/dwm.fifo) to dwm that allows you controll keybind actions through CLI.
 
-* hide vacant tags - wip
+* hide vacant tags - done
   Pretty self-explainatory :)
 
-* statusallmons - wip
+* statusallmons - done
   Makes the statusbar available to all displays.
   thinking about switching to: http://dwm.suckless.org/patches/multimon
 
-* runorraise -wip
+* runorraise - done
   Allows you to map frequently used apps to a key combo that will launch the application if it's not already running - otherwise bring the running session into focus. Great stuff to use with browsers and notes.
 
 * notitle - wip

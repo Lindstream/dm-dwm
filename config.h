@@ -91,67 +91,67 @@ static Key keys[] = {
 	/* Commands */
 	{ MODKEY,                       XK_space,   spawn,          {.v = cmd_dmenu } },
 	{ MODKEY|ShiftMask,             XK_Return, 	spawn,          {.v = cmd_term } },
-	{ MODKEY,			            XK_x, 	   	spawn,     {.v = cmd_browser } },
+	{ MODKEY,			                  XK_x, 	   	runorrise,      {.v = cmd_browser } },
 	
 	/* General */
 	{ MODKEY,                       XK_b,      	togglebar,      {0} },
 	{ MODKEY,                       XK_Return, 	zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    	view,           {0} },
-	{ MODKEY,			            XK_q,      	killclient,     {0} },
+	{ MODKEY,			                  XK_q,      	killclient,     {0} },
 	{ MODKEY,                       XK_0,      	view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      	tag,            {.ui = ~0 } },
-	{ MODKEY,             			XK_minus,   incnmaster,     {.i = +1 } },
+	{ MODKEY,             			    XK_minus,   incnmaster,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_minus,   incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      	setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      	setmfact,       {.f = +0.05} },	
 	{ MODKEY,                       XK_comma,  	focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, 	focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  	tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,          	XK_period, 	tagmon,         {.i = +1 } },
+	{ MODKEY|ShiftMask,          	  XK_period, 	tagmon,         {.i = +1 } },
 	
 	/* Layouts */
 	{ MODKEY,                       XK_t,      	setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      	setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_m,      	setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_z,  		setlayout,      {0} },
-	{ MODKEY|ShiftMask,             XK_f,  		togglefloating, {0} },
+	{ MODKEY,                       XK_z,  		  setlayout,      {0} },
+	{ MODKEY|ShiftMask,             XK_f,  		  togglefloating, {0} },
 
 	/* Sloppy bindings to switch focus */ 
-	{ MODKEY,           			XK_Right,   focusstack,     {.i = +1 } },
-    { MODKEY,           			XK_Left,    focusstack,     {.i = -1 } },
-    { MODKEY,           			XK_Down,    focusstack,     {.i = +1 } },
-    { MODKEY,           			XK_Up,      focusstack,     {.i = -1 } },
-    { MODKEY,           			XK_d,       focusstack,     {.i = +1 } },
-    { MODKEY,          				XK_a,       focusstack,     {.i = -1 } },
-    { MODKEY,           			XK_s,       focusstack,     {.i = +1 } },
-    { MODKEY,           			XK_w,       focusstack,     {.i = -1 } },
+	{ MODKEY,           			XK_Right,         focusstack,     {.i = +1 } },
+  { MODKEY,           			XK_Left,          focusstack,     {.i = -1 } },
+  { MODKEY,           			XK_Down,          focusstack,     {.i = +1 } },
+  { MODKEY,           			XK_Up,            focusstack,     {.i = -1 } },
+  { MODKEY,           			XK_d,             focusstack,     {.i = +1 } },
+  { MODKEY,          				XK_a,             focusstack,     {.i = -1 } },
+  { MODKEY,           			XK_s,             focusstack,     {.i = +1 } },
+  { MODKEY,           			XK_w,             focusstack,     {.i = -1 } },
 	
 	/* MBP Mappings */ 
 	{ 0, XF86MonBrightnessUp,  				   	spawn,          {.v = kb_backlightinc } },
-    { 0, XF86MonBrightnessDown,				   	spawn,         	{.v = kb_backlightdec } },
-    { 0, XF86KbdBrightnessUp,  				   	spawn,          {.v = kb_lighton } },
-    { 0, XF86KbdBrightnessDown,				   	spawn,          {.v = kb_lightoff } },
-    { 0, XF86AudioPrev,        				   	spawn,          {.v = kb_audio_prev } },
-    { 0, XF86AudioPlay,        				   	spawn,          {.v = kb_audio_play } },
-    { 0, XF86AudioNext,        				   	spawn,          {.v = kb_audio_next } },
-    { 0, XF86AudioMute,        				   	spawn,          {.v = kb_audio_mute } },
-    { 0, XF86AudioLowerVolume, 				   	spawn,          {.v = kb_audio_vold } },
-    { 0, XF86AudioRaiseVolume, 				   	spawn,          {.v = kb_audio_volu } },
-    { 0, XF86LauncherKB1,          			   	spawn,          {.v = kb_launcher1 } },
+  { 0, XF86MonBrightnessDown,				   	spawn,         	{.v = kb_backlightdec } },
+  { 0, XF86KbdBrightnessUp,  				   	spawn,          {.v = kb_lighton } },
+  { 0, XF86KbdBrightnessDown,				   	spawn,          {.v = kb_lightoff } },
+  { 0, XF86AudioPrev,        				   	spawn,          {.v = kb_audio_prev } },
+  { 0, XF86AudioPlay,        				   	spawn,          {.v = kb_audio_play } },
+  { 0, XF86AudioNext,        				   	spawn,          {.v = kb_audio_next } },
+  { 0, XF86AudioMute,        				   	spawn,          {.v = kb_audio_mute } },
+  { 0, XF86AudioLowerVolume, 				   	spawn,          {.v = kb_audio_vold } },
+  { 0, XF86AudioRaiseVolume, 				   	spawn,          {.v = kb_audio_volu } },
+  { 0, XF86LauncherKB1,          			  spawn,          {.v = kb_launcher1 } },
 
-    /* Forever alone, quits. */
-    { MODKEY|ShiftMask,             XK_q,		quit,           {0} },
+  /* Forever alone, quits. */
+  { MODKEY|ShiftMask,             XK_q,		    quit,         {0} },
 
     /* Tags */ 
-	TAGKEYS(                        XK_1,                     	0)
-	TAGKEYS(                        XK_2,                      	1)
-	TAGKEYS(                        XK_3,                      	2)
-	TAGKEYS(                        XK_4,                      	3)
-	TAGKEYS(                        XK_5,                      	4)
-	TAGKEYS(                        XK_6,                      	5)
-	TAGKEYS(                        XK_7,                      	6)
-	TAGKEYS(                        XK_8,                      	7)
-	TAGKEYS(                        XK_9,                      	8)
+	TAGKEYS(                        XK_1,                      0)
+	TAGKEYS(                        XK_2,                      1)
+	TAGKEYS(                        XK_3,                      2)
+	TAGKEYS(                        XK_4,                      3)
+	TAGKEYS(                        XK_5,                      4)
+	TAGKEYS(                        XK_6,                      5)
+	TAGKEYS(                        XK_7,                      6)
+	TAGKEYS(                        XK_8,                      7)
+	TAGKEYS(                        XK_9,                      8)
 };
 
 
