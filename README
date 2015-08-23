@@ -22,11 +22,11 @@ Patches
 * notitle - done
   Who need titles anyway?
 
-* save_floats
+* save_floats - done
   Makes dwm remember the floating position and window size before things are tiled, and restores them appropriately.
 
-* bottom stack - wip
-  Two really nifty layouts 
+* bottom stack - done
+  Nowamore nicknamed htile
 
 * better borders - wip
   Removes borders when there are only one window visible, when a single app is fullscreen or the same width of the display.
