@@ -19,18 +19,18 @@ Patches
 * runorraise - done
   Allows you to map frequently used apps to a key combo that will launch the application if it's not already running - otherwise bring the running session into focus. Great stuff to use with browsers and notes.
 
-* notitle - wip
+* notitle - done
   Who need titles anyway?
-
-* better borders - wip
-  Removes borders when there are only one window visible, when a single app is fullscreen or the same width of the display.
 
 * save_floats
   Makes dwm remember the floating position and window size before things are tiled, and restores them appropriately.
 
-
 * bottom stack - wip
-  A very nifty layout 
+  Two really nifty layouts 
+
+* better borders - wip
+  Removes borders when there are only one window visible, when a single app is fullscreen or the same width of the display.
+
 
 * center
 
