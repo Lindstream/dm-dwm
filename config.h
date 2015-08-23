@@ -70,7 +70,6 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *cmd_dmenu[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *cmd_term[]  = { "st", NULL };
 static const char *cmd_browser[] = { "firefox", NULL, NULL, NULL, "Firefox" };
 static const char *kb_backlightdec[] = { "xbacklight", "-dec", "10", NULL };
@@ -173,3 +172,66 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
 
+/* dwmfifo, make sure it exists */
+static const char *dwmfifo = "/tmp/dwm.fifo";
+static Command commands[] = {
+   { "dmenu",           spawn,          {.v = cmd_dmenu} },
+   { "term",            spawn,          {.v = cmd_term} },
+   { "togglebar",       togglebar,      {0} },
+   { "focusstack+",     focusstack,     {.i = +1} },
+   { "focusstack-",     focusstack,     {.i = -1} },
+   { "incnmaster+",     incnmaster,     {.i = +1} },
+   { "incnmaster-",     incnmaster,     {.i = -1} },
+   { "setmfact+",       setmfact,       {.f = +0.05} },
+   { "setmfact-",       setmfact,       {.f = -0.05} },
+   { "zoom",            zoom,           {0} },
+   { "view",            view,           {0} },
+   { "killclient",      killclient,     {0} },
+   { "setlayout-tiled", setlayout,      {.v = &layouts[0]} },
+   { "setlayout-float", setlayout,      {.v = &layouts[1]} },
+   { "setlayout-mono",  setlayout,      {.v = &layouts[2]} },
+   { "togglelayout",    setlayout,      {0} },
+   { "togglefloating",  togglefloating, {0} },
+   { "viewall",         view,           {.ui = ~0} },
+   { "tag",             tag,            {.ui = ~0} },
+   { "focusmon+",       focusmon,       {.i = +1} },
+   { "focusmon-",       focusmon,       {.i = -1} },
+   { "tagmon+",         tagmon,         {.i = +1} },
+   { "tagmon-",         tagmon,         {.i = -1} },
+   { "view1",           view,           {.ui = 1 << 0} },
+   { "view2",           view,           {.ui = 1 << 1} },
+   { "view3",           view,           {.ui = 1 << 2} },
+   { "view4",           view,           {.ui = 1 << 3} },
+   { "view5",           view,           {.ui = 1 << 4} },
+   { "view6",           view,           {.ui = 1 << 5} },
+   { "view7",           view,           {.ui = 1 << 6} },
+   { "view8",           view,           {.ui = 1 << 7} },
+   { "view9",           view,           {.ui = 1 << 8} },
+   { "toggleview1",     toggleview,     {.ui = 1 << 0} },
+   { "toggleview2",     toggleview,     {.ui = 1 << 1} },
+   { "toggleview3",     toggleview,     {.ui = 1 << 2} },
+   { "toggleview4",     toggleview,     {.ui = 1 << 3} },
+   { "toggleview5",     toggleview,     {.ui = 1 << 4} },
+   { "toggleview6",     toggleview,     {.ui = 1 << 5} },
+   { "toggleview7",     toggleview,     {.ui = 1 << 6} },
+   { "toggleview8",     toggleview,     {.ui = 1 << 7} },
+   { "toggleview9",     toggleview,     {.ui = 1 << 8} },
+   { "tag1",            tag,            {.ui = 1 << 0} },
+   { "tag2",            tag,            {.ui = 1 << 1} },
+   { "tag3",            tag,            {.ui = 1 << 2} },
+   { "tag4",            tag,            {.ui = 1 << 3} },
+   { "tag5",            tag,            {.ui = 1 << 4} },
+   { "tag6",            tag,            {.ui = 1 << 5} },
+   { "tag7",            tag,            {.ui = 1 << 6} },
+   { "tag8",            tag,            {.ui = 1 << 7} },
+   { "tag9",            tag,            {.ui = 1 << 8} },
+   { "toggletag1",      toggletag,      {.ui = 1 << 0} },
+   { "toggletag2",      toggletag,      {.ui = 1 << 1} },
+   { "toggletag3",      toggletag,      {.ui = 1 << 2} },
+   { "toggletag4",      toggletag,      {.ui = 1 << 3} },
+   { "toggletag5",      toggletag,      {.ui = 1 << 4} },
+   { "toggletag6",      toggletag,      {.ui = 1 << 5} },
+   { "toggletag7",      toggletag,      {.ui = 1 << 6} },
+   { "toggletag8",      toggletag,      {.ui = 1 << 7} },
+   { "toggletag9",      toggletag,      {.ui = 1 << 8} },
+};

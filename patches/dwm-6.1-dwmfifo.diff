@@ -1,0 +1,215 @@
+diff --git a/config.def.h b/config.def.h
+index 875885b..c0a01fa 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -108,3 +108,65 @@ static Button buttons[] = {
+ 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+ };
+ 
++static const char *dwmfifo = "/tmp/dwm.fifo";
++static Command commands[] = {
++	{ "dmenu",           spawn,          {.v = dmenucmd} },
++	{ "term",            spawn,          {.v = termcmd} },
++	{ "togglebar",       togglebar,      {0} },
++	{ "focusstack+",     focusstack,     {.i = +1} },
++	{ "focusstack-",     focusstack,     {.i = -1} },
++	{ "incnmaster+",     incnmaster,     {.i = +1} },
++	{ "incnmaster-",     incnmaster,     {.i = -1} },
++	{ "setmfact+",       setmfact,       {.f = +0.05} },
++	{ "setmfact-",       setmfact,       {.f = -0.05} },
++	{ "zoom",            zoom,           {0} },
++	{ "view",            view,           {0} },
++	{ "killclient",      killclient,     {0} },
++	{ "setlayout-tiled", setlayout,      {.v = &layouts[0]} },
++	{ "setlayout-float", setlayout,      {.v = &layouts[1]} },
++	{ "setlayout-mono",  setlayout,      {.v = &layouts[2]} },
++	{ "togglelayout",    setlayout,      {0} },
++	{ "togglefloating",  togglefloating, {0} },
++	{ "viewall",         view,           {.ui = ~0} },
++	{ "tag",             tag,            {.ui = ~0} },
++	{ "focusmon+",       focusmon,       {.i = +1} },
++	{ "focusmon-",       focusmon,       {.i = -1} },
++	{ "tagmon+",         tagmon,         {.i = +1} },
++	{ "tagmon-",         tagmon,         {.i = -1} },
++	{ "view1",           view,           {.ui = 1 << 0} },
++	{ "view2",           view,           {.ui = 1 << 1} },
++	{ "view3",           view,           {.ui = 1 << 2} },
++	{ "view4",           view,           {.ui = 1 << 3} },
++	{ "view5",           view,           {.ui = 1 << 4} },
++	{ "view6",           view,           {.ui = 1 << 5} },
++	{ "view7",           view,           {.ui = 1 << 6} },
++	{ "view8",           view,           {.ui = 1 << 7} },
++	{ "view9",           view,           {.ui = 1 << 8} },
++	{ "toggleview1",     toggleview,     {.ui = 1 << 0} },
++	{ "toggleview2",     toggleview,     {.ui = 1 << 1} },
++	{ "toggleview3",     toggleview,     {.ui = 1 << 2} },
++	{ "toggleview4",     toggleview,     {.ui = 1 << 3} },
++	{ "toggleview5",     toggleview,     {.ui = 1 << 4} },
++	{ "toggleview6",     toggleview,     {.ui = 1 << 5} },
++	{ "toggleview7",     toggleview,     {.ui = 1 << 6} },
++	{ "toggleview8",     toggleview,     {.ui = 1 << 7} },
++	{ "toggleview9",     toggleview,     {.ui = 1 << 8} },
++	{ "tag1",            tag,            {.ui = 1 << 0} },
++	{ "tag2",            tag,            {.ui = 1 << 1} },
++	{ "tag3",            tag,            {.ui = 1 << 2} },
++	{ "tag4",            tag,            {.ui = 1 << 3} },
++	{ "tag5",            tag,            {.ui = 1 << 4} },
++	{ "tag6",            tag,            {.ui = 1 << 5} },
++	{ "tag7",            tag,            {.ui = 1 << 6} },
++	{ "tag8",            tag,            {.ui = 1 << 7} },
++	{ "tag9",            tag,            {.ui = 1 << 8} },
++	{ "toggletag1",      toggletag,      {.ui = 1 << 0} },
++	{ "toggletag2",      toggletag,      {.ui = 1 << 1} },
++	{ "toggletag3",      toggletag,      {.ui = 1 << 2} },
++	{ "toggletag4",      toggletag,      {.ui = 1 << 3} },
++	{ "toggletag5",      toggletag,      {.ui = 1 << 4} },
++	{ "toggletag6",      toggletag,      {.ui = 1 << 5} },
++	{ "toggletag7",      toggletag,      {.ui = 1 << 6} },
++	{ "toggletag8",      toggletag,      {.ui = 1 << 7} },
++	{ "toggletag9",      toggletag,      {.ui = 1 << 8} },
++};
+diff --git a/dwm.c b/dwm.c
+index 1bbb4b3..cd7ddd1 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -21,6 +21,7 @@
+  * To understand everything else, start reading main().
+  */
+ #include <errno.h>
++#include <fcntl.h>
+ #include <locale.h>
+ #include <stdarg.h>
+ #include <signal.h>
+@@ -28,6 +29,8 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <unistd.h>
++#include <sys/select.h>
++#include <sys/stat.h>
+ #include <sys/types.h>
+ #include <sys/wait.h>
+ #include <X11/cursorfont.h>
+@@ -140,6 +143,12 @@ typedef struct {
+ 	int monitor;
+ } Rule;
+ 
++typedef struct {
++	const char *name;
++	void (*func)(const Arg *arg);
++	const Arg arg;
++} Command;
++
+ /* function declarations */
+ static void applyrules(Client *c);
+ static Bool applysizehints(Client *c, int *x, int *y, int *w, int *h, Bool interact);
+@@ -161,9 +170,11 @@ static void destroynotify(XEvent *e);
+ static void detach(Client *c);
+ static void detachstack(Client *c);
+ static Monitor *dirtomon(int dir);
++static void dispatchcmd(void);
+ static void drawbar(Monitor *m);
+ static void drawbars(void);
+ static void enternotify(XEvent *e);
++static Bool evpredicate();
+ static void expose(XEvent *e);
+ static void focus(Client *c);
+ static void focusin(XEvent *e);
+@@ -266,6 +277,7 @@ static Drw *drw;
+ static Fnt *fnt;
+ static Monitor *mons, *selmon;
+ static Window root;
++static int fifofd;
+ 
+ /* configuration, allows nested code to access above variables */
+ #include "config.h"
+@@ -485,6 +497,7 @@ cleanup(void) {
+ 	XSync(dpy, False);
+ 	XSetInputFocus(dpy, PointerRoot, RevertToPointerRoot, CurrentTime);
+ 	XDeleteProperty(dpy, root, netatom[NetActiveWindow]);
++	close(fifofd);
+ }
+ 
+ void
+@@ -691,6 +704,25 @@ dirtomon(int dir) {
+ }
+ 
+ void
++dispatchcmd(void)
++{
++	int i;
++	char buf[BUFSIZ];
++	ssize_t n;
++
++	n = read(fifofd, buf, sizeof(buf) - 1);
++	if (n == -1)
++		die("Failed to read from DWM fifo\n");
++	buf[n] = '\0';
++	for (i = 0; i < LENGTH(commands); i++) {
++		if (strcmp(commands[i].name, buf) == 0) {
++			commands[i].func(&commands[i].arg);
++			break;
++		}
++	}
++}
++
++void
+ drawbar(Monitor *m) {
+ 	int x, xx, w;
+ 	unsigned int i, occ = 0, urg = 0;
+@@ -768,6 +800,12 @@ enternotify(XEvent *e) {
+ 	focus(c);
+ }
+ 
++Bool
++evpredicate()
++{
++	return True;
++}
++
+ void
+ expose(XEvent *e) {
+ 	Monitor *m;
+@@ -1341,11 +1379,30 @@ restack(Monitor *m) {
+ void
+ run(void) {
+ 	XEvent ev;
++	fd_set rfds;
++	int n;
++	int dpyfd, maxfd;
+ 	/* main event loop */
+ 	XSync(dpy, False);
+-	while(running && !XNextEvent(dpy, &ev))
+-		if(handler[ev.type])
+-			handler[ev.type](&ev); /* call handler */
++	dpyfd = ConnectionNumber(dpy);
++	maxfd = fifofd;
++	if (dpyfd > maxfd)
++		maxfd = dpyfd;
++	maxfd++;
++	while (running) {
++		FD_ZERO(&rfds);
++		FD_SET(fifofd, &rfds);
++		FD_SET(dpyfd, &rfds);
++		n = select(maxfd, &rfds, NULL, NULL, NULL);
++		if (n > 0) {
++			if (FD_ISSET(fifofd, &rfds))
++				dispatchcmd();
++			if (FD_ISSET(dpyfd, &rfds))
++				while (XCheckIfEvent(dpy, &ev, evpredicate, NULL))
++					if (handler[ev.type])
++						handler[ev.type](&ev); /* call handler */
++		}
++	}
+ }
+ 
+ void
+@@ -1543,6 +1600,9 @@ setup(void) {
+ 	XSelectInput(dpy, root, wa.event_mask);
+ 	grabkeys();
+ 	focus(NULL);
++	fifofd = open(dwmfifo, O_RDWR | O_NONBLOCK);
++	if (fifofd < 0)
++		die("Failed to open DWM fifo\n");
+ }
+ 
+ void

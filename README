@@ -1,51 +1,39 @@
-dwm - dynamic window manager
+Lindstreams DWM config
 ============================
-dwm is an extremely fast, small, and dynamic window manager for X.
+dwm is an extremely fast, small, and dynamic window manager for X. 
+
+Think I've found my ultimate patchset, lets roll.. 
+
+Patches
+----------------------------
+* dwmfifo - done
+  Best thing since sliced bread, this patch adds a FIFO command/controller (/tmp/dwm.fifo) to dwm that allows you controll keybind actions through CLI.
+
+* hide vacant tags - wip
+  Pretty self-explainatory :)
+
+* statusallmons - wip
+  Makes the statusbar available to all displays.
+  thinking about switching to: http://dwm.suckless.org/patches/multimon
+
+* runorraise -wip
+  Allows you to map frequently used apps to a key combo that will launch the application if it's not already running - otherwise bring the running session into focus. Great stuff to use with browsers and notes.
+
+* notitle - wip
+  Who need titles anyway?
+
+* better borders - wip
+  Removes borders when there are only one window visible, when a single app is fullscreen or the same width of the display.
+
+* save_floats
+  Makes dwm remember the floating position and window size before things are tiled, and restores them appropriately.
 
 
-Requirements
-------------
-In order to build dwm you need the Xlib header files.
+* bottom stack - wip
+  A very nifty layout 
 
+* center
 
-Installation
-------------
-Edit config.mk to match your local setup (dwm is installed into
-the /usr/local namespace by default).
+* occupiedcol
+* uselessgaps
 
-Afterwards enter the following command to build and install dwm (if
-necessary as root):
-
-    make clean install
-
-If you are going to use the default bluegray color scheme it is highly
-recommended to also install the bluegray files shipped in the dextra package.
-
-
-Running dwm
------------
-Add the following line to your .xinitrc to start dwm using startx:
-
-    exec dwm
-
-In order to connect dwm to a specific display, make sure that
-the DISPLAY environment variable is set correctly, e.g.:
-
-    DISPLAY=foo.bar:1 exec dwm
-
-(This will start dwm on display :1 of the host foo.bar.)
-
-In order to display status info in the bar, you can do something
-like this in your .xinitrc:
-
-    while xsetroot -name "`date` `uptime | sed 's/.*,//'`"
-    do
-    	sleep 1
-    done &
-    exec dwm
-
-
-Configuration
--------------
-The configuration of dwm is done by creating a custom config.h
-and (re)compiling the source code.
