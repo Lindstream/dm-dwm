@@ -28,11 +28,15 @@ Patches
 * bottom stack - done
   Nowamore nicknamed htile
 
+* center - done
+  Adds an “iscentered” rule to automatically center clients on the current monitor.
+
+
 * better borders - wip
   Removes borders when there are only one window visible, when a single app is fullscreen or the same width of the display.
 
 
-* center
+
 
 * occupiedcol
 * uselessgaps
