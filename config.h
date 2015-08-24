@@ -19,21 +19,22 @@ static const char *fonts[] = {
     "Sans:size=10.5",
 };
 
-static const char normbordercolor[]       = "#202020";
+static const char normbordercolor[]       = "#282828";
 static const char normbgcolor[]           = "#383838";
-static const char normfgcolor[]           = "#7a7976";
-static const char selbordercolor[]        = "#323232";
+static const char normfgcolor[]           = "#585858";
+static const char selbordercolor[]        = "#dc9656";
 static const char selbgcolor[]            = "#383838";
-static const char selfgcolor[]            = "#f8f8f8";
+static const char selfgcolor[]            = "#d8d8d8";
 static const char floatnormbordercolor[]  = "#585858";
 static const char floatselbordercolor[]   = "#585858";
 static const char urgentbordercolor[]     = "#3f3f3f";
 static const char urgentfgcolor[]         = "#FF0000";
 static const char urgentbgcolor[]         = "#383838";
-static const unsigned int borderpx        = 1;        /* border pixel of windows */
+static const unsigned int borderpx        = 3;        /* border pixel of windows */
 static const unsigned int snap            = 32;       /* snap pixel */
 static const Bool showbar                 = True;     /* False means no bar */
 static const Bool topbar                  = False;    /* False means bottom bar */
+static const unsigned int gappx = 2; /* gap pixel between windows */
 
 //* tagging */
 static const char *tags[] = { 
@@ -65,7 +66,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact      = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact      = 0.65; /* factor of master area size [0.05..0.95] */
 static const int nmaster      = 1;    /* number of clients in master area */
 static const Bool resizehints = False; /* True means respect size hints in tiled resizals */
 
