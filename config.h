@@ -15,7 +15,7 @@
 
 /* appearance */
 static const char *fonts[] = {
-    "Siji:size=15",
+    "Siji:size=12",
     "Sans:size=10.5",
 };
 
@@ -37,16 +37,15 @@ static const Bool topbar                  = False;    /* False means bottom bar 
 
 //* tagging */
 static const char *tags[] = { 
-    "\uE187", /* 01 - logo */
-    "\uE188", /* 02 - web */
-    "\uE189", /* 03 - chat */
-    "\uE18A", /* 04 - dev */
-    "\uE18B", /* 05 - draw */
-    "\uE18C", /* 06 - transfers */
-    "\uE18D", /* 07 - img */
-    "\uE18E", /* 08 - mov */
-    "\uE190", /* 09 - music */
-    "\uE869"  /* 10 - tools */
+    "\uE174\uE0AA", /* 01 - misc */
+    "\uE175\uE1A0", /* 02 - web */
+    "\uE176\uE1D3", /* 03 - dev */
+    "\uE177\uE1ED", /* 04 - text */
+    "\uE178\uE1A6", /* 05 - music */
+    "\uE179\uE1D1", /* 06 - media */
+    "\uE17A\uE0AD", /* 07 - chat */
+    "\uE17B\uE19C", /* 08 - transfers */
+    "\uE17C\uE0AC", /* 09 - mail & news  */
 };
 
 static const Rule rules[] = {
@@ -55,21 +54,27 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class               instance    title       tags mask     iscentered  isfloating   monitor */
-	{ "Deadbeef",          NULL,       NULL,       5,            False,       True,      -1 },
-	{ "Firefox",           NULL,       NULL,       1 << 1,       False,      False,      -1 },
+  { "CherryTree",        NULL,       NULL,       1 << 3,       True,       True,       -1 },
+  { "Deadbeef",          NULL,       NULL,       1 << 4,       True,       True,       -1 },
+	{ "Deluge",            NULL,       NULL,       1 << 7,       True,       True,       -1 },
+  { "Firefox",           NULL,       NULL,       1 << 1,       False,      False,      -1 },
+  {  "Termite",          NULL,       "WeeChat 1.2",  1 << 6,       False,      False,      -1 },
+  {  NULL,               NULL,       "glances",  1 << 4,       False,      False,      -1 },
+  { "Subl3",             NULL,       NULL,       1 << 2,       False,      False,      -1 },
+	{ "GIMP",              NULL,       NULL,       1 << 4,       False,      False,      -1 },
 };
 
 /* layout(s) */
 static const float mfact      = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster      = 1;    /* number of clients in master area */
-static const Bool resizehints = True; /* True means respect size hints in tiled resizals */
+static const Bool resizehints = False; /* True means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-  { "[M]",      monocle },
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-  { "[H]",      htile },
+	{ "\uE002",      tile },    /* first entry is default */
+  { "\uE001",      monocle },
+	{ "\uE006",      NULL },    /* no layout function means floating behavior */
+  { "\uE003",      htile },
 
 };
 
@@ -95,6 +100,8 @@ static const char dmenu_lines[]    = "10";
 static const char *cmd_dmenu[] = { "launcher", "dmenu", "-s", dmenumon, "-fn", dmenufont, "-w", dmenu_width, "-h", dmenu_lheight, "-l", dmenu_lines, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, "-centerx", "-centery", NULL };
 static const char *cmd_term[]  = { "termite", NULL };
 static const char *cmd_browser[] = { "firefox", NULL, NULL, NULL, "Firefox" };
+static const char *cmd_chrome[] = { "chromium", NULL, NULL, NULL, "Firefox" };
+static const char *cmd_sublime[] = { "subl3", NULL, NULL, NULL, "Subl3" };
 static const char *kb_backlightdec[] = { "xbacklight", "-dec", "10", NULL };
 static const char *kb_backlightinc[] = { "xbacklight", "-inc", "10", NULL };
 static const char *kb_launcher1[] = { "xbacklight", "-dec", "10", NULL };
@@ -201,6 +208,8 @@ static Command commands[] = {
    { "dmenu",           spawn,          {.v = cmd_term} },
    { "term",            spawn,          {.v = cmd_term} },
    { "cmd_browser",     runorraise,     {.v = cmd_browser} },
+   { "cmd_chrome",      runorraise,     {.v = cmd_chrome} },
+   { "cmd_sublime",     runorraise,     {.v = cmd_sublime} },
    { "togglebar",       togglebar,      {0} },
    { "focusstack+",     focusstack,     {.i = +1} },
    { "focusstack-",     focusstack,     {.i = -1} },
