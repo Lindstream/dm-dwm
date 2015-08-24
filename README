@@ -31,6 +31,9 @@ Patches
 * center - done
   Adds an “iscentered” rule to automatically center clients on the current monitor.
 
+* Urgent & float colors - done
+  Adds a few more colors to dwm's palette.
+
 
 * better borders - wip
   Removes borders when there are only one window visible, when a single app is fullscreen or the same width of the display.

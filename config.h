@@ -19,17 +19,23 @@ static const char *fonts[] = {
     "VL Gothic:size=10.5",
     "WenQuanYi Micro Hei:size=10.5",
 };
-static const char dmenufont[] = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*";
-static const char normbordercolor[] = "#202020";
-static const char normbgcolor[]     = "#383838";
-static const char normfgcolor[]     = "#282828";
-static const char selbordercolor[]  = "#323232";
-static const char selbgcolor[]      = "#383838";
-static const char selfgcolor[]      = "#f8f8f8";
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int snap      = 32;       /* snap pixel */
-static const Bool showbar           = True;     /* False means no bar */
-static const Bool topbar            = False;     /* False means bottom bar */
+
+static const char dmenufont[]             = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*";
+static const char normbordercolor[]       = "#202020";
+static const char normbgcolor[]           = "#383838";
+static const char normfgcolor[]           = "#282828";
+static const char selbordercolor[]        = "#323232";
+static const char selbgcolor[]            = "#383838";
+static const char selfgcolor[]            = "#f8f8f8";
+static const char floatnormbordercolor[]  = "#585858";
+static const char floatselbordercolor[]   = "#585858";
+static const char urgentbordercolor[]     = "#3f3f3f";
+static const char urgentfgcolor[]         = "#FF0000";
+static const char urgentbgcolor[]         = "#383838";
+static const unsigned int borderpx        = 1;        /* border pixel of windows */
+static const unsigned int snap            = 32;       /* snap pixel */
+static const Bool showbar                 = True;     /* False means no bar */
+static const Bool topbar                  = False;    /* False means bottom bar */
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };

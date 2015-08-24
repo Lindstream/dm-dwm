@@ -23,6 +23,7 @@ typedef struct {
 	Clr *fg;
 	Clr *bg;
 	Clr *border;
+	Clr *floatborder;
 } ClrScheme;
 
 typedef struct {
