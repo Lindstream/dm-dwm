@@ -31,8 +31,13 @@ Patches
 * center - done
   Adds an “iscentered” rule to automatically center clients on the current monitor.
 
-* Urgent & float colors - done
+* urgent & float colors - done
   Adds a few more colors to dwm's palette.
+
+* focusmaster - done
+  Super + ShiftR takes you back to your master client.
+
+
 
 
 * better borders - wip

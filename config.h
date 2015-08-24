@@ -15,15 +15,13 @@
 
 /* appearance */
 static const char *fonts[] = {
+    "Siji:size=15",
     "Sans:size=10.5",
-    "VL Gothic:size=10.5",
-    "WenQuanYi Micro Hei:size=10.5",
 };
 
-static const char dmenufont[]             = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*";
 static const char normbordercolor[]       = "#202020";
 static const char normbgcolor[]           = "#383838";
-static const char normfgcolor[]           = "#282828";
+static const char normfgcolor[]           = "#7a7976";
 static const char selbordercolor[]        = "#323232";
 static const char selbgcolor[]            = "#383838";
 static const char selfgcolor[]            = "#f8f8f8";
@@ -37,8 +35,19 @@ static const unsigned int snap            = 32;       /* snap pixel */
 static const Bool showbar                 = True;     /* False means no bar */
 static const Bool topbar                  = False;    /* False means bottom bar */
 
-/* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+//* tagging */
+static const char *tags[] = { 
+    "\uE187", /* 01 - logo */
+    "\uE188", /* 02 - web */
+    "\uE189", /* 03 - chat */
+    "\uE18A", /* 04 - dev */
+    "\uE18B", /* 05 - draw */
+    "\uE18C", /* 06 - transfers */
+    "\uE18D", /* 07 - img */
+    "\uE18E", /* 08 - mov */
+    "\uE190", /* 09 - music */
+    "\uE869"  /* 10 - tools */
+};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -46,8 +55,8 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class               instance    title       tags mask     iscentered  isfloating   monitor */
-	{ "Deadbeef",          NULL,       NULL,       5 << 8,       True,       True,      -1 },
-	{ "Firefox",           NULL,       NULL,       1 << 8,       False,      False,      -1 },
+	{ "Deadbeef",          NULL,       NULL,       5,            False,       True,      -1 },
+	{ "Firefox",           NULL,       NULL,       1 << 1,       False,      False,      -1 },
 };
 
 /* layout(s) */
@@ -75,9 +84,15 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
+/* dmenu */
+static char dmenumon[2]         = "0"; /* component of dmenucmd, manipulated in spawn() */
+static const char dmenufont[]   = "-*-terminus2-*-*-*-*-18-*-*-*-*-*-*-*";
+static const char dmenu_width[]    = "400";  
+static const char dmenu_lheight[]  = "25";  
+static const char dmenu_lines[]    = "10";
+
 /* commands */
-static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *cmd_dmenu[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *cmd_dmenu[] = { "launcher", "dmenu", "-s", dmenumon, "-fn", dmenufont, "-w", dmenu_width, "-h", dmenu_lheight, "-l", dmenu_lines, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, "-centerx", "-centery", NULL };
 static const char *cmd_term[]  = { "termite", NULL };
 static const char *cmd_browser[] = { "firefox", NULL, NULL, NULL, "Firefox" };
 static const char *kb_backlightdec[] = { "xbacklight", "-dec", "10", NULL };
@@ -99,7 +114,7 @@ static Key keys[] = {
 	/* Commands */
 	{ MODKEY,                       XK_space,   spawn,          {.v = cmd_dmenu } },
 	{ MODKEY|ShiftMask,             XK_Return, 	spawn,          {.v = cmd_term } },
-	{ MODKEY,			                  XK_x, 	   	runorraise,      {.v = cmd_browser } },
+	{ MODKEY,			                  XK_x, 	   	runorraise,     {.v = cmd_browser } },
 	
 	/* General */
 	{ MODKEY|ShiftMask,             XK_b,      	togglebar,      {0} },
@@ -185,6 +200,7 @@ static const char *dwmfifo = "/tmp/dwm.fifo";
 static Command commands[] = {
    { "dmenu",           spawn,          {.v = cmd_term} },
    { "term",            spawn,          {.v = cmd_term} },
+   { "cmd_browser",     runorraise,     {.v = cmd_browser} },
    { "togglebar",       togglebar,      {0} },
    { "focusstack+",     focusstack,     {.i = +1} },
    { "focusstack-",     focusstack,     {.i = -1} },
