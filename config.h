@@ -113,7 +113,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_h,      	setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      	setmfact,       {.f = +0.05} },	
 	{ MODKEY,                       XK_comma,  	focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, 	focusmon,       {.i = +1 } },
+  { MODKEY,                       XK_period,  focusmon,       {.i = +1 } },
+	{ MODKEY,                       XK_Shift_R, focusmaster,    {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  	tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,          	  XK_period, 	tagmon,         {.i = +1 } },
 	

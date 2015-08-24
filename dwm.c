@@ -181,6 +181,7 @@ static Bool evpredicate();
 static void expose(XEvent *e);
 static void focus(Client *c);
 static void focusin(XEvent *e);
+static void focusmaster(const Arg *arg);
 static void focusmon(const Arg *arg);
 static void focusstack(const Arg *arg);
 static Bool getrootptr(int *x, int *y);
@@ -856,6 +857,11 @@ focusin(XEvent *e) { /* there are some broken focus acquiring clients */
 
 	if(selmon->sel && ev->window != selmon->sel->win)
 		setfocus(selmon->sel);
+}
+
+void
+focusmaster(const Arg *arg) {
+	focus(nexttiled(selmon->clients));
 }
 
 void
