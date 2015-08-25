@@ -38,15 +38,12 @@ Patches
 * focusmaster - done
   Super + ShiftR takes you back to your master client.
 
+* uselessgaps- done
+  Adds the possibillity to gap windows, also takes care of border in monocle and fullscreen mode.
 
+* emptyview - wip
+  There's something annoying about not being able to toggle that last tag out of view.. 
+  - Needs some fixing though, make sure view is made active when passing windows btwn monitors.
 
-
-* better borders - wip
-  Removes borders when there are only one window visible, when a single app is fullscreen or the same width of the display.
-
-
-
-
-* occupiedcol
-* uselessgaps
-
+* occupiedcol - uncertain
+  I dont know, not the original patch, but something similar, maybe..
