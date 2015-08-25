@@ -55,14 +55,14 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class               instance    title              tags mask     iscentered  isfloating   monitor */
-  { "CherryTree",        NULL,       NULL,              1 << 3,       True,       True,       -1 },
-  { "Deadbeef",          NULL,       NULL,              1 << 4,       True,       True,       -1 },
-	{ "Deluge",            NULL,       NULL,              1 << 7,       True,       True,       -1 },
-  { "Firefox",           NULL,       NULL,              1 << 1,       False,      False,      -1 },
-  { "Termite",           NULL,       "weechat",         1 << 6,       False,      False,      -1 },
-  {  NULL,               NULL,       "glances",         1 << 4,       False,      False,      -1 },
-  { "Subl3",             NULL,       NULL,              1 << 2,       False,      False,      -1 },
-	{ "GIMP",              NULL,       NULL,              1 << 4,       False,      False,      -1 },
+  { "CherryTree",        NULL,       NULL,              1 << 3,       True,       True,        1 },
+  { "Deadbeef",          NULL,       NULL,              1 << 4,       True,       True,        1 },
+	{ "Deluge",            NULL,       NULL,              1 << 7,       True,       True,        1 },
+  { "Firefox",           NULL,       NULL,              1 << 1,       False,      False,       1 },
+  { "Termite",           NULL,       "weechat",         1 << 6,       False,      False,       1 },
+  {  NULL,               NULL,       "glances",         1 << 4,       False,      False,       1 },
+  { "Subl3",             NULL,       NULL,              1 << 2,       False,      False,       1 },
+	{ "GIMP",              NULL,       NULL,              1 << 4,       False,      False,       0 },
 };
 
 /* layout(s) */
@@ -91,20 +91,26 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* dmenu */
-static char dmenumon[2]         = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char dmenufont[]   = "-*-terminus2-*-*-*-*-18-*-*-*-*-*-*-*";
+static char dmenumon[2]             = "0"; /* component of dmenucmd, manipulated in spawn() */
+
+static const char dmenufont[]       = "-*-siji-*-*-*-*-20-*-*-*-*-*-*-*"
+                                      ","
+                                      "-*-terminus2-*-*-*-*-18-*-*-*-*-*-*-*";
+
 static const char dmenu_width[]    = "400";  
 static const char dmenu_lheight[]  = "25";  
 static const char dmenu_lines[]    = "10";
 
 /* commands */
-static const char *cmd_dmenu[] = { "launcher", "dmenu", "-s", dmenumon, "-fn", dmenufont, "-w", dmenu_width, "-h", dmenu_lheight, "-l", dmenu_lines, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, "-centerx", "-centery", NULL };
-static const char *cmd_term[]  = { "termite", NULL };
 static const char *cmd_browser[] = { "firefox", NULL, NULL, NULL, "Firefox" };
+static const char *cmd_cherrytree[] = { "cherrytree", NULL, NULL, NULL, "CherryTree" };
 static const char *cmd_chrome[] = { "chromium", NULL, NULL, NULL, "Chromium" };
-static const char *cmd_sublime[] = { "subl3", NULL, NULL, NULL, "Subl3" };
+static const char *cmd_deadbeef[] = { "deadbeef", NULL, NULL, NULL, "DeaDBeeF-devel" };
 static const char *cmd_deluge[] = { "deluge-gtk", NULL, NULL, NULL, "Deluge" };
-static const char *cmd_cherry[] = { "cherrytree", NULL, NULL, NULL, "Deluge" };
+static const char *cmd_dmenu[] = { "launcher", "dmenu", "-s", dmenumon, "-fn", dmenufont, "-w", dmenu_width, "-h", dmenu_lheight, "-l", dmenu_lines, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, "-centerx", "-centery", NULL };
+static const char *cmd_sublime[] = { "subl3", NULL, NULL, NULL, "Subl3" };
+static const char *cmd_term[]  = { "termite", NULL };
+static const char *cmd_weechat[]  = { "termite", "--title", "weechat", "-e", "weechat", NULL, NULL, NULL,  "weechat" };
 static const char *kb_backlightdec[] = { "xbacklight", "-dec", "10", NULL };
 static const char *kb_backlightinc[] = { "xbacklight", "-inc", "10", NULL };
 static const char *kb_launcher1[] = { "xbacklight", "-dec", "10", NULL };
@@ -208,12 +214,15 @@ static Button buttons[] = {
 
 static const char *dwmfifo = "/tmp/dwm.fifo";
 static Command commands[] = {
-   { "dmenu",           spawn,          {.v = cmd_term} },
-   { "term",            spawn,          {.v = cmd_term} },
    { "cmd_browser",     runorraise,     {.v = cmd_browser} },
+   { "cmd_cherrytree",  runorraise,     {.v = cmd_cherrytree} },
    { "cmd_chrome",      runorraise,     {.v = cmd_chrome} },
-   { "cmd_sublime",     runorraise,     {.v = cmd_sublime} },
+   { "cmd_deadbeef",    runorraise,     {.v = cmd_deadbeef} },
    { "cmd_deluge",      runorraise,     {.v = cmd_deluge} },
+   { "cmd_dmenu",       spawn,          {.v = cmd_term} },
+   { "cmd_sublime",     runorraise,     {.v = cmd_sublime} },
+   { "cmd_term",        spawn,          {.v = cmd_term} },
+   { "cmd_weechat",     runorraise,     {.v = cmd_weechat} },
    { "togglebar",       togglebar,      {0} },
    { "focusstack+",     focusstack,     {.i = +1} },
    { "focusstack-",     focusstack,     {.i = -1} },

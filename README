@@ -19,6 +19,7 @@ Patches
 * runorraise - done
   Allows you to map frequently used apps to a key combo that will launch the application if it's not already running - otherwise bring the running session into focus. Great stuff to use with browsers and notes.
   - changed it to toggleview instead of switching to that view alone.
+  - now also checks for running applications by window title AND names!
 
 * notitle - done
   Who need titles anyway?
