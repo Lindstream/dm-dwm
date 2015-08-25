@@ -34,9 +34,12 @@ static const unsigned int borderpx        = 3;        /* border pixel of windows
 static const unsigned int snap            = 32;       /* snap pixel */
 static const Bool showbar                 = True;     /* False means no bar */
 static const Bool topbar                  = False;    /* False means bottom bar */
-static const unsigned int gappx = 2; /* gap pixel between windows */
+static const unsigned int gappx           = 2;        /* gap pixel between windows */
 
-//* tagging */
+/* behavior */ 
+static const Bool viewontag               = True;     /* Switch view on tag switch */
+
+/* tagging */
 static const char *tags[] = { 
     "\uE174\uE0AA", /* 01 - misc */
     "\uE175\uE1A0", /* 02 - web */
@@ -55,11 +58,12 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class               instance    title              tags mask     iscentered  isfloating   monitor */
-  { "CherryTree",        NULL,       NULL,              1 << 3,       True,       True,        1 },
-  { "Deadbeef",          NULL,       NULL,              1 << 4,       True,       True,        1 },
+  { "CherryTree",        NULL,       NULL,              1 << 3,       False,      False,        1 },
+  { "Deadbeef",          NULL,       NULL,              1 << 4,       False,      False,        1 },
 	{ "Deluge",            NULL,       NULL,              1 << 7,       True,       True,        1 },
   { "Firefox",           NULL,       NULL,              1 << 1,       False,      False,       1 },
-  { "Termite",           NULL,       "weechat",         1 << 6,       False,      False,       1 },
+  { "Chromium",          NULL,       NULL,              1 << 1,       False,      False,       1 },
+  { "Termite",           NULL,       "weechat",         1 << 6,       False,      False,       2 },
   {  NULL,               NULL,       "glances",         1 << 4,       False,      False,       1 },
   { "Subl3",             NULL,       NULL,              1 << 2,       False,      False,       1 },
 	{ "GIMP",              NULL,       NULL,              1 << 4,       False,      False,       0 },
@@ -224,22 +228,14 @@ static Command commands[] = {
    { "cmd_term",        spawn,          {.v = cmd_term} },
    { "cmd_weechat",     runorraise,     {.v = cmd_weechat} },
    { "togglebar",       togglebar,      {0} },
-   { "focusstack+",     focusstack,     {.i = +1} },
-   { "focusstack-",     focusstack,     {.i = -1} },
-   { "incnmaster+",     incnmaster,     {.i = +1} },
-   { "incnmaster-",     incnmaster,     {.i = -1} },
-   { "setmfact+",       setmfact,       {.f = +0.05} },
-   { "setmfact-",       setmfact,       {.f = -0.05} },
-   { "zoom",            zoom,           {0} },
-   { "view",            view,           {0} },
    { "killclient",      killclient,     {0} },
    { "setlayout-tiled", setlayout,      {.v = &layouts[0]} },
-   { "setlayout-float", setlayout,      {.v = &layouts[1]} },
-   { "setlayout-mono",  setlayout,      {.v = &layouts[2]} },
-   { "togglelayout",    setlayout,      {0} },
+   { "setlayout-float", setlayout,      {.v = &layouts[2]} },
+   { "setlayout-mono",  setlayout,      {.v = &layouts[1]} },
+   { "setlayout-htile", setlayout,      {.v = &layouts[3]} },
    { "togglefloating",  togglefloating, {0} },
    { "viewall",         view,           {.ui = ~0} },
-   { "tag",             tag,            {.ui = ~0} },
+   { "focusmon3",       focusmon,       {.i = 2} },
    { "focusmon+",       focusmon,       {.i = +1} },
    { "focusmon-",       focusmon,       {.i = -1} },
    { "tagmon+",         tagmon,         {.i = +1} },
