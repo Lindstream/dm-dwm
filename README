@@ -42,9 +42,20 @@ Patches
 * uselessgaps- done
   Adds the possibillity to gap windows, also takes care of border in monocle and fullscreen mode.
 
-* emptyview - wip
+* viewontag - done
+  Follow a window to the tag it's being moved to, can't really decide on this one - option is set in config.h
+
+* keep tags - wip
+  Tags should be kept when moving clients between displays
+
+* emptyview - done
   There's something annoying about not being able to toggle that last tag out of view.. 
-  - Needs some fixing though, make sure view is made active when passing windows btwn monitors.
+
+* ispermanent - wip
+  Hinders accidental termination of clients
+
+* swap focus - wip
+  Allows you to switch focus with a single shortcut
 
 * occupiedcol - uncertain
   I dont know, not the original patch, but something similar, maybe..
