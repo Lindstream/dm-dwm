@@ -324,7 +324,6 @@ applyrules(Client *c) {
 	if(ch.res_name)
 		XFree(ch.res_name);
 	
-	/* ref1 */
 	if(c->tags & TAGMASK)
 		c->tags = c->tags & TAGMASK;
 	else if(c->mon->tagset[c->mon->seltags])
@@ -1527,8 +1526,9 @@ sendmon(Client *c, Monitor *m) {
 	detach(c);
 	detachstack(c);
 	c->mon = m;
-	/* c->tags = m->tagset[m->seltags];  assign tags of target monitor ref2 */
-	c->tags = (m->tagset[m->seltags] ? m->tagset[m->seltags] : 1);
+	/* c->tags = m->tagset[m->seltags];  assign tags of target monitor */
+	c->tags = (c->tags ? c->tags : 1); /* keeptags */
+                
 	attach(c);
 	attachstack(c);
 	focus(NULL);
