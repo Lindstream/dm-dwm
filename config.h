@@ -18,23 +18,18 @@ static const char *fonts[] = {
     "Siji:size=12",
     "Sans:size=10.5",
 };
-#define NUMCOLORS 4
+#define NUMCOLORS 6
 
 static const char colors[NUMCOLORS][MAXCOLORS][8] = {
    // border   foreground  background
    { "#282828", "#585858", "#383838" },  // 0 = normal
    { "#dc9656", "#d8d8d8", "#383838" },  // 1 = selected
-   { "#ff9900", "#0066ff", "#ffffff" },  // 3 = urgent
-   { "#ff0000", "#ffffff", "#ff0000" },  // 4 = error
+   { "#ff0000", "#ffffff", "#ff0000" },  // 2 = urgent
+   { "#ff0000", "#ffffff", "#ff0000" },  // 3 = error
+   { "#ff9900", "#0066ff", "#ffffff" },  // 4 = dmenu - normal
+   { "#ff9900", "#0066ff", "#ffffff" },  // 5 = dmenu - selected
    // add more here
 };
-
-static const char normbordercolor[]       = "#282828";
-static const char normbgcolor[]           = "#383838";
-static const char normfgcolor[]           = "#585858";
-static const char selbordercolor[]        = "#dc9656";
-static const char selbgcolor[]            = "#383838";
-static const char selfgcolor[]            = "#d8d8d8";
 
 static const unsigned int tagspacing      = 5;        /* space between tags */
 static const unsigned int tagpadding      = 30;        /* inner padding of tags */
@@ -119,7 +114,7 @@ static const char *cmd_cherrytree[] = { "cherrytree", NULL, NULL, NULL, "CherryT
 static const char *cmd_chrome[] = { "chromium", NULL, NULL, NULL, "Chromium" };
 static const char *cmd_deadbeef[] = { "deadbeef", NULL, NULL, NULL, "DeaDBeeF-devel" };
 static const char *cmd_deluge[] = { "deluge-gtk", NULL, NULL, NULL, "Deluge" };
-static const char *cmd_dmenu[] = { "launcher", dmenumon, "dmenu", "-s", dmenumon, "-fn", dmenufont, "-w", dmenu_width, "-h", dmenu_lheight, "-l", dmenu_lines, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, "-centerx", "-centery", NULL };
+static const char *cmd_dmenu[] = { "launcher", dmenumon, "dmenu", "-s", dmenumon, "-fn", dmenufont, "-w", dmenu_width, "-h", dmenu_lheight, "-l", dmenu_lines, "-nb", colors[4][2], "-nf", colors[4][1], "-sb", colors[5][2], "-sf", colors[5][1], "-centerx", "-centery", NULL };
 static const char *cmd_sublime[] = { "subl3", NULL, NULL, NULL, "Subl3" };
 static const char *cmd_term[]  = { "termite", NULL };
 static const char *cmd_weechat[]  = { "termite", "--title", "weechat", "-e", "weechat", NULL, NULL, NULL,  "weechat" };
