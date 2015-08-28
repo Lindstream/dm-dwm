@@ -196,6 +196,31 @@ drw_clr_free(Clr *clr) {
 		free(clr);
 }
 
+int
+drw_colored_text(Drw *drw, ClrScheme *scheme, int numcolors, int x, int y, unsigned int w, unsigned int h, char *text) {
+	if(!drw || !drw->fontcount || !drw->scheme)
+		return 0;
+
+	char *buf = text, *ptr = buf, c =1;
+	int i;
+
+	while(*ptr) {
+		for(i = 0; *ptr < 0 || *ptr > numcolors; i++, ptr++);
+		if(!*ptr)
+			break;
+		c = *ptr;
+		*ptr = 0;
+		if(i) {
+			x = drw_text(drw, x, y, w, h, buf, 0);
+		}
+		*ptr = c;
+		drw_setscheme(drw, &scheme[c-1]);
+		buf = ++ptr;
+	}
+	drw_text(drw, x, y, w, h, buf, 0);
+	return x;
+}
+
 void
 drw_setscheme(Drw *drw, ClrScheme *scheme) {
 	if(drw && scheme)
@@ -203,12 +228,12 @@ drw_setscheme(Drw *drw, ClrScheme *scheme) {
 }
 
 void
-drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h, int filled, int empty, int invert) {
+drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h, int filled, int empty) {
 	int dx;
 
 	if(!drw || !drw->fontcount || !drw->scheme)
 		return;
-	XSetForeground(drw->dpy, drw->gc, invert ? drw->scheme->bg->pix : drw->scheme->fg->pix);
+	XSetForeground(drw->dpy, drw->gc, drw->scheme->fg->pix);
 	dx = (drw->fonts[0]->ascent + drw->fonts[0]->descent + 2) / 4;
 	if(filled)
 		XFillRectangle(drw->dpy, drw->drawable, drw->gc, x+1, y+1, dx+1, dx+1);
@@ -217,7 +242,7 @@ drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h, int filled, int
 }
 
 int
-drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, const char *text, int invert) {
+drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, const char *text, int pad) {
 	char buf[1024];
 	int tx, ty, th;
 	Extnts tex;
@@ -242,7 +267,7 @@ drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, const char *tex
 	if (!drw || !drw->scheme) {
 		return 0;
 	} else if (render) {
-		XSetForeground(drw->dpy, drw->gc, invert ? drw->scheme->fg->pix : drw->scheme->bg->pix);
+		XSetForeground(drw->dpy, drw->gc, drw->scheme->bg->pix);
 		XFillRectangle(drw->dpy, drw->drawable, drw->gc, x, y, w, h);
 	}
 
@@ -294,10 +319,10 @@ drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, const char *tex
 					for(i = len; i && i > len - 3; buf[--i] = '.');
 
 				if (render) {
-					th = curfont->ascent + curfont->descent;
-					ty = y + (h / 2) - (th / 2) + curfont->ascent;
+					th = pad ? (curfont->ascent + curfont->descent) : 0;
+					ty = y + ((h + curfont->ascent - curfont->descent) / 2);
 					tx = x + (h / 2);
-					XftDrawStringUtf8(d, invert ? &drw->scheme->bg->rgb : &drw->scheme->fg->rgb, curfont->xfont, tx, ty, (XftChar8 *)buf, len);
+					XftDrawStringUtf8(d, &drw->scheme->fg->rgb, curfont->xfont, tx, ty, (XftChar8 *)buf, len);
 				}
 
 				x += tex.w;

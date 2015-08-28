@@ -18,6 +18,16 @@ static const char *fonts[] = {
     "Siji:size=12",
     "Sans:size=10.5",
 };
+#define NUMCOLORS 4
+
+static const char colors[NUMCOLORS][MAXCOLORS][8] = {
+   // border   foreground  background
+   { "#282828", "#585858", "#383838" },  // 0 = normal
+   { "#dc9656", "#d8d8d8", "#383838" },  // 1 = selected
+   { "#ff9900", "#0066ff", "#ffffff" },  // 3 = urgent
+   { "#ff0000", "#ffffff", "#ff0000" },  // 4 = error
+   // add more here
+};
 
 static const char normbordercolor[]       = "#282828";
 static const char normbgcolor[]           = "#383838";
@@ -25,11 +35,9 @@ static const char normfgcolor[]           = "#585858";
 static const char selbordercolor[]        = "#dc9656";
 static const char selbgcolor[]            = "#383838";
 static const char selfgcolor[]            = "#d8d8d8";
-static const char floatnormbordercolor[]  = "#585858";
-static const char floatselbordercolor[]   = "#585858";
-static const char urgentbordercolor[]     = "#3f3f3f";
-static const char urgentfgcolor[]         = "#FF0000";
-static const char urgentbgcolor[]         = "#383838";
+
+static const unsigned int tagspacing      = 5;        /* space between tags */
+static const unsigned int tagpadding      = 30;        /* inner padding of tags */
 static const unsigned int borderpx        = 3;        /* border pixel of windows */
 static const unsigned int snap            = 32;       /* snap pixel */
 static const Bool showbar                 = True;     /* False means no bar */

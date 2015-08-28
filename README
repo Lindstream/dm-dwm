@@ -31,7 +31,7 @@ Patches
 * center - done
   Adds an “iscentered” rule to automatically center clients on the current monitor.
 
-* urgent & float colors - done
+* urgent & float colors - scrapped
   Adds a few more colors to dwm's palette.
 
 * focusmaster - done
@@ -46,6 +46,9 @@ Patches
 * emptyview - done
   There's something annoying about not being able to toggle that last tag out of view.. 
 
+* statuscolors
+
+
 * ispermanent - wip
   Hinders accidental termination of clients
 
@@ -54,6 +57,7 @@ Patches
 
 * occupiedcol - uncertain
   I dont know, not the original patch, but something similar, maybe..
+
 
 
 Modifications

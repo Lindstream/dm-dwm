@@ -54,6 +54,7 @@
                                * MAX(0, MIN((y)+(h),(m)->wy+(m)->wh) - MAX((y),(m)->wy)))
 #define ISVISIBLE(C)            ((C->tags & C->mon->tagset[C->mon->seltags]))
 #define LENGTH(X)               (sizeof X / sizeof X[0])
+#define MAXCOLORS               9
 #define MOUSEMASK               (BUTTONMASK|PointerMotionMask)
 #define WIDTH(X)                ((X)->w + 2 * (X)->bw + gappx)
 #define HEIGHT(X)               ((X)->h + 2 * (X)->bw + gappx)
@@ -62,7 +63,7 @@
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel, SchemeUrg, SchemeLast }; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeLast }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
@@ -277,7 +278,7 @@ static void (*handler[LASTEvent]) (XEvent *) = {
 static Atom wmatom[WMLast], netatom[NetLast];
 static Bool running = True;
 static Cur *cursor[CurLast];
-static ClrScheme scheme[SchemeLast];
+static ClrScheme scheme[MAXCOLORS];
 static Display *dpy;
 static Drw *drw;
 static Monitor *mons, *selmon;
@@ -502,15 +503,11 @@ cleanup(void) {
 	drw_cur_free(drw, cursor[CurNormal]);
 	drw_cur_free(drw, cursor[CurResize]);
 	drw_cur_free(drw, cursor[CurMove]);
-	drw_clr_free(scheme[SchemeNorm].border);
-	drw_clr_free(scheme[SchemeNorm].bg);
-	drw_clr_free(scheme[SchemeNorm].fg);
-	drw_clr_free(scheme[SchemeSel].border);
-	drw_clr_free(scheme[SchemeSel].bg);
-	drw_clr_free(scheme[SchemeSel].fg);
-	drw_clr_free(scheme[SchemeUrg].border);
-	drw_clr_free(scheme[SchemeUrg].bg);
-	drw_clr_free(scheme[SchemeUrg].fg);
+	for(int i = 0; i < NUMCOLORS; i++){
+		drw_clr_free(scheme[i].border);
+		drw_clr_free(scheme[i].fg);
+		drw_clr_free(scheme[i].bg);
+	}
 	drw_free(drw);
 	XSync(dpy, False);
 	XSetInputFocus(dpy, PointerRoot, RevertToPointerRoot, CurrentTime);
@@ -752,22 +749,21 @@ drawbar(Monitor *m) {
 		if(c->isurgent)
 			urg |= c->tags;
 	}
+
 	x = 0;
 	for(i = 0; i < LENGTH(tags); i++) {
 		/* do not draw vacant tags */
 		if(!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
 			continue;
 		w = TEXTW(tags[i]);
-		drw_setscheme(drw, m->tagset[m->seltags] & 1 << i ? &scheme[SchemeSel] : &scheme[SchemeNorm]);
-		if(urg & 1 << i)
-			drw_setscheme(drw, &scheme[SchemeUrg]);
-			drw_text(drw, x, 0, w, bh, tags[i], 0);
-			drw_rect(drw, x, 0, w, bh, m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
-		           occ & 1 << i, 0);		
+		drw_setscheme(drw, &scheme[(m->tagset[m->seltags] & 1 << i) ? 1 : (urg & 1 << i ? 2:0)]);
+		drw_text(drw, x, 0, w, bh, tags[i], 1);
+		drw_rect(drw, x, 0, w, bh, m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
+		          occ & 1 << i);
 		x += w;
 	}
 	w = blw = TEXTW(m->ltsymbol);
-	drw_setscheme(drw, &scheme[SchemeNorm]);
+	drw_setscheme(drw, &scheme[0]);
 	drw_text(drw, x, 0, w, bh, m->ltsymbol, 0);
 	x += w;
 	xx = x;
@@ -777,10 +773,10 @@ drawbar(Monitor *m) {
 		x = xx;
 		w = m->ww - xx;
 	}
-	drw_text(drw, x, 0, w, bh, stext, 0);
+	drw_colored_text(drw, scheme, NUMCOLORS, x, 0, w, bh, stext);
 	if((w = x - xx) > bh) {
 		x = xx;
-		drw_setscheme(drw, &scheme[SchemeNorm]);
+		drw_setscheme(drw, &scheme[0]);
 		drw_text(drw, x, 0, w, bh, NULL, 0);
 	}
 	drw_map(drw, m->barwin, 0, 0, m->ww, bh);
@@ -843,10 +839,7 @@ focus(Client *c) {
 		detachstack(c);
 		attachstack(c);
 		grabbuttons(c, True);
-		if(c->isfloating)
-			XSetWindowBorder(dpy, c->win, scheme[SchemeSel].floatborder->pix);
-		else
-			XSetWindowBorder(dpy, c->win, scheme[SchemeSel].border->pix);
+		XSetWindowBorder(dpy, c->win, scheme[1].border->pix); /*REF4 - float-border */
 		setfocus(c);
 	}
 	else {
@@ -1104,10 +1097,7 @@ manage(Window w, XWindowAttributes *wa) {
 
 	wc.border_width = c->bw;
 	XConfigureWindow(dpy, w, CWBorderWidth, &wc);
-	if(c->isfloating)
-		XSetWindowBorder(dpy, w, scheme[SchemeNorm].floatborder->pix);
-	else
-		XSetWindowBorder(dpy, w, scheme[SchemeNorm].border->pix);
+	XSetWindowBorder(dpy, w, scheme[0].border->pix); /*REF4*/
 	configure(c); /* propagates border_width, if size doesn't change */
 	updatewindowtype(c);
 	updatesizehints(c);
@@ -1122,8 +1112,6 @@ manage(Window w, XWindowAttributes *wa) {
 		c->isfloating = c->oldstate = trans != None || c->isfixed;
 	if(c->isfloating)
 		XRaiseWindow(dpy, c->win);
-	if(c->isfloating)
-		XSetWindowBorder(dpy, w, scheme[SchemeNorm].floatborder->pix);
 	attach(c);
 	attachstack(c);
 	XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
@@ -1670,18 +1658,11 @@ setup(void) {
 	cursor[CurResize] = drw_cur_create(drw, XC_sizing);
 	cursor[CurMove] = drw_cur_create(drw, XC_fleur);
 	/* init appearance */
-	scheme[SchemeNorm].floatborder = drw_clr_create(drw, floatnormbordercolor);
-	scheme[SchemeNorm].border = drw_clr_create(drw, normbordercolor);
-	scheme[SchemeNorm].bg = drw_clr_create(drw, normbgcolor);
-	scheme[SchemeNorm].fg = drw_clr_create(drw, normfgcolor);
-	scheme[SchemeSel].floatborder = drw_clr_create(drw, floatselbordercolor);
-	scheme[SchemeSel].border = drw_clr_create(drw, selbordercolor);
-	scheme[SchemeSel].bg = drw_clr_create(drw, selbgcolor);
-	scheme[SchemeSel].fg = drw_clr_create(drw, selfgcolor);
-	scheme[SchemeUrg].floatborder = drw_clr_create(drw, floatselbordercolor);
-	scheme[SchemeUrg].border = drw_clr_create(drw, urgentbordercolor);
-	scheme[SchemeUrg].bg = drw_clr_create(drw, urgentbgcolor);
-	scheme[SchemeUrg].fg = drw_clr_create(drw, urgentfgcolor);
+	for(int i = 0; i < NUMCOLORS; i++){
+		scheme[i].border = drw_clr_create(drw, colors[i][0]);
+		scheme[i].fg = drw_clr_create(drw, colors[i][1]);
+		scheme[i].bg = drw_clr_create(drw, colors[i][2]);
+	}
 	/* init bars */
 	updatebars();
 	updatestatus();
@@ -1826,12 +1807,6 @@ togglefloating(const Arg *arg) {
 		return;
 	selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
 	if(selmon->sel->isfloating)
-		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel].floatborder->pix);
-	/* REF3
-	else
-		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel].border->pix);
-	*/
-	if(selmon->sel->isfloating)
 		/*restore last known float dimensions*/
 		resize(selmon->sel, selmon->sel->sfx, selmon->sel->sfy,
 		       selmon->sel->sfw, selmon->sel->sfh, False);
@@ -1873,7 +1848,7 @@ unfocus(Client *c, Bool setfocus) {
 	if(!c)
 		return;
 	grabbuttons(c, False);
-	XSetWindowBorder(dpy, c->win, scheme[SchemeNorm].border->pix);
+	XSetWindowBorder(dpy, c->win, scheme[0].border->pix);
 	if(setfocus) {
 		XSetInputFocus(dpy, root, RevertToPointerRoot, CurrentTime);
 		XDeleteProperty(dpy, root, netatom[NetActiveWindow]);
