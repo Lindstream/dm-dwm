@@ -1637,7 +1637,7 @@ setup(void) {
 	drw_load_fonts(drw, fonts, LENGTH(fonts));
 	if (!drw->fontcount)
 		die("No fonts could be loaded.\n");
-	bh = drw->fonts[0]->h + 2;
+	bh = drw->fonts[0]->h + barpadding;
 	updategeom();
 	/* init atoms */
 	wmatom[WMProtocols] = XInternAtom(dpy, "WM_PROTOCOLS", False);

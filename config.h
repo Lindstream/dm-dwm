@@ -22,7 +22,7 @@ static const char *fonts[] = {
 
 static const char colors[NUMCOLORS][MAXCOLORS][8] = {
    // border   foreground  background
-   { "#282828", "#585858", "#383838" },  // 0 = normal
+   { "#282828", "#887e75", "#181818" },  // 0 = normal
    { "#dc9656", "#d8d8d8", "#383838" },  // 1 = selected
    { "#ff0000", "#ffffff", "#ff0000" },  // 2 = urgent
    { "#ff0000", "#ffffff", "#ff0000" },  // 3 = error
@@ -31,8 +31,7 @@ static const char colors[NUMCOLORS][MAXCOLORS][8] = {
    // add more here
 };
 
-static const unsigned int tagspacing      = 5;        /* space between tags */
-static const unsigned int tagpadding      = 30;        /* inner padding of tags */
+static const unsigned int barpadding      = 8;       /* inner padding of tags */
 static const unsigned int borderpx        = 3;        /* border pixel of windows */
 static const unsigned int snap            = 32;       /* snap pixel */
 static const Bool showbar                 = True;     /* False means no bar */
