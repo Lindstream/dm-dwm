@@ -1488,6 +1488,7 @@ runorraise(const Arg *arg) {
             }
         }
     }
+ 
     /* Client not found: spawn it */
     spawn(arg);
 }
@@ -1746,7 +1747,7 @@ tag(const Arg *arg) {
 		focus(NULL);
 		arrange(selmon);
 		if(viewontag)
-			view(arg);
+			toggleview(arg);
 	}
 }
 
@@ -1826,8 +1827,10 @@ togglefloating(const Arg *arg) {
 	selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
 	if(selmon->sel->isfloating)
 		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel].floatborder->pix);
+	/* REF3
 	else
 		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel].border->pix);
+	*/
 	if(selmon->sel->isfloating)
 		/*restore last known float dimensions*/
 		resize(selmon->sel, selmon->sel->sfx, selmon->sel->sfy,

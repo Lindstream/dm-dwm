@@ -37,7 +37,7 @@ static const Bool topbar                  = False;    /* False means bottom bar 
 static const unsigned int gappx           = 2;        /* gap pixel between windows */
 
 /* behavior */ 
-static const Bool viewontag               = True;     /* Switch view on tag switch */
+static const Bool viewontag               = False;     /* Switch view on tag switch */
 
 /* tagging */
 static const char *tags[] = { 
@@ -111,11 +111,11 @@ static const char *cmd_cherrytree[] = { "cherrytree", NULL, NULL, NULL, "CherryT
 static const char *cmd_chrome[] = { "chromium", NULL, NULL, NULL, "Chromium" };
 static const char *cmd_deadbeef[] = { "deadbeef", NULL, NULL, NULL, "DeaDBeeF-devel" };
 static const char *cmd_deluge[] = { "deluge-gtk", NULL, NULL, NULL, "Deluge" };
-static const char *cmd_dmenu[] = { "launcher", "dmenu", "-s", dmenumon, "-fn", dmenufont, "-w", dmenu_width, "-h", dmenu_lheight, "-l", dmenu_lines, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, "-centerx", "-centery", NULL };
+static const char *cmd_dmenu[] = { "launcher", dmenumon, "dmenu", "-s", dmenumon, "-fn", dmenufont, "-w", dmenu_width, "-h", dmenu_lheight, "-l", dmenu_lines, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, "-centerx", "-centery", NULL };
 static const char *cmd_sublime[] = { "subl3", NULL, NULL, NULL, "Subl3" };
 static const char *cmd_term[]  = { "termite", NULL };
 static const char *cmd_weechat[]  = { "termite", "--title", "weechat", "-e", "weechat", NULL, NULL, NULL,  "weechat" };
-static const char *kb_backlightdec[] = { "xbacklight", "-dec", "10", NULL };
+static const char *kb_backlightdec[] = { "xbacklight", "-dec", "2", NULL };
 static const char *kb_backlightinc[] = { "xbacklight", "-inc", "10", NULL };
 static const char *kb_launcher1[] = { "xbacklight", "-dec", "10", NULL };
 /*static const char *kb_launcher2[] = { "xbacklight", "-dec", "10", NULL };*/
@@ -235,7 +235,7 @@ static Command commands[] = {
    { "setlayout-htile", setlayout,      {.v = &layouts[3]} },
    { "togglefloating",  togglefloating, {0} },
    { "viewall",         view,           {.ui = ~0} },
-   { "focusmon3",       focusmon,       {.i = 2} },
+   { "viewnone",        view,           {.ui = 0} },
    { "focusmon+",       focusmon,       {.i = +1} },
    { "focusmon-",       focusmon,       {.i = -1} },
    { "tagmon+",         tagmon,         {.i = +1} },

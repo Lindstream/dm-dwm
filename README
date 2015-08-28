@@ -64,3 +64,6 @@ Modifications
 * runorraise
   - checks for running applications by window title aswell as names
   - changed it to toggleview 
+
+* borderfix  (ref3)
+  border was applied wo all windows when reattaching floating windows. 
