@@ -319,9 +319,10 @@ drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, const char *tex
 					for(i = len; i && i > len - 3; buf[--i] = '.');
 
 				if (render) {
+					pad = pad ? ( pad / 2 ) : 0;
 					th = curfont->ascent + curfont->descent;
 					ty = y + (h / 2) - (th / 2) + curfont->ascent;
-					tx = x + (h / 2);
+					tx = x + (h / 2) + pad;
 					XftDrawStringUtf8(d, &drw->scheme->fg->rgb, curfont->xfont, tx, ty, (XftChar8 *)buf, len);
 				}
 

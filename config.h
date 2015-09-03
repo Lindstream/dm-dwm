@@ -15,60 +15,65 @@
 
 /* appearance */
 static const char *fonts[] = {
-    "Siji:size=12",
-    "Sans:size=10.5",
+    "AnonMix:size=12",
+    "Siji:size=10",
+    "Anonymous Pro for Powerline-10:style=bold", 
 };
-#define NUMCOLORS 6
+#define NUMCOLORS 7
 
 static const char colors[NUMCOLORS][MAXCOLORS][8] = {
    // border   foreground  background
    { "#282828", "#887e75", "#181818" },  // 0 = normal
-   { "#dc9656", "#d8d8d8", "#383838" },  // 1 = selected
-   { "#ff0000", "#ffffff", "#ff0000" },  // 2 = urgent
-   { "#ff0000", "#ffffff", "#ff0000" },  // 3 = error
-   { "#ff9900", "#0066ff", "#ffffff" },  // 4 = dmenu - normal
-   { "#ff9900", "#0066ff", "#ffffff" },  // 5 = dmenu - selected
+   { "#dc9656", "#d8d8d8", "#181818" },  // 1 = selected 
+   { "#dc9656", "#dc9656", "#181818" },  // 2 = active 
+   { "#ff0000", "#ffffff", "#181818" },  // 3 = urgent
+   { "#ff0000", "#ffffff", "#181818" },  // 4 = error
+   { "#ff9900", "#887e75", "#181818" },  // 5 = dmenu - normal
+   { "#ff9900", "#181818", "#dc9656" },  // 6 = dmenu - selected
    // add more here
 };
 
-static const unsigned int barpadding      = 8;       /* inner padding of tags */
+static const unsigned int barpadding      = 6;        /* adds top padding to bar */
+static const unsigned int tagpadding      = 6;        /* adds padding to tags */
+static const unsigned int rectpadding     = 2;        /* selector padding +xy */
 static const unsigned int borderpx        = 3;        /* border pixel of windows */
 static const unsigned int snap            = 32;       /* snap pixel */
 static const Bool showbar                 = True;     /* False means no bar */
 static const Bool topbar                  = False;    /* False means bottom bar */
-static const unsigned int gappx           = 2;        /* gap pixel between windows */
+static const unsigned int gappx           = 0;        /* gap pixel between windows */
+
 
 /* behavior */ 
 static const Bool viewontag               = False;     /* Switch view on tag switch */
 
 /* tagging */
-static const char *tags[] = { 
-    "\uE174\uE0AA", /* 01 - misc */
-    "\uE175\uE1A0", /* 02 - web */
-    "\uE176\uE1D3", /* 03 - dev */
-    "\uE177\uE1ED", /* 04 - text */
-    "\uE178\uE1A6", /* 05 - music */
-    "\uE179\uE1D1", /* 06 - media */
-    "\uE17A\uE0AD", /* 07 - chat */
-    "\uE17B\uE19C", /* 08 - transfers */
-    "\uE17C\uE0AC", /* 09 - mail & news  */
+static const char *tags[] = {
+    "1 \uE60D", /* 01 - misc kk*/
+    "2 \uE68B", /* 02 - web ok*/
+    "3 \uE685", /* 03 - dev ok*/
+    "4 \uE67D", /* 04 - text */
+    "5 \uE61C", /* 05 - music kk*/
+    "6 \uE6CD", /* 06 - media ok*/ 
+    "7 \uE6CB", /* 07 - files & transfers kk*/
+    "8 \uE71D", /* 08 - chats kk*/
+    "9 \uE6CC", /* 09 - news & mail  kk*/
 };
 
 static const Rule rules[] = {
-	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
-	 */
-	/* class               instance    title              tags mask     iscentered  isfloating   monitor */
+  /* xprop(1):
+   *	WM_CLASS(STRING) = instance, class
+   *	WM_NAME(STRING) = title
+   */
+  /* class               instance    title              tags mask     iscentered  isfloating   monitor */
   { "CherryTree",        NULL,       NULL,              1 << 3,       False,      False,        1 },
   { "Deadbeef",          NULL,       NULL,              1 << 4,       False,      False,        1 },
-	{ "Deluge",            NULL,       NULL,              1 << 7,       True,       True,        1 },
+  { "Deluge",            NULL,       NULL,              1 << 7,       True,       True,        1 },
   { "Firefox",           NULL,       NULL,              1 << 1,       False,      False,       1 },
   { "Chromium",          NULL,       NULL,              1 << 1,       False,      False,       1 },
   { "Termite",           NULL,       "weechat",         1 << 6,       False,      False,       2 },
   {  NULL,               NULL,       "glances",         1 << 4,       False,      False,       1 },
   { "Subl3",             NULL,       NULL,              1 << 2,       False,      False,       1 },
-	{ "GIMP",              NULL,       NULL,              1 << 4,       False,      False,       0 },
+  { "GIMP",              NULL,       NULL,              1 << 4,       False,      False,       0 },
 };
 
 /* layout(s) */
@@ -99,9 +104,7 @@ static const Layout layouts[] = {
 /* dmenu */
 static char dmenumon[2]             = "0"; /* component of dmenucmd, manipulated in spawn() */
 
-static const char dmenufont[]       = "-*-siji-*-*-*-*-20-*-*-*-*-*-*-*"
-                                      ","
-                                      "-*-terminus2-*-*-*-*-18-*-*-*-*-*-*-*";
+static const char dmenufont[]       = "AndaleMono-10";
 
 static const char dmenu_width[]    = "400";  
 static const char dmenu_lheight[]  = "25";  
@@ -113,14 +116,14 @@ static const char *cmd_cherrytree[] = { "cherrytree", NULL, NULL, NULL, "CherryT
 static const char *cmd_chrome[] = { "chromium", NULL, NULL, NULL, "Chromium" };
 static const char *cmd_deadbeef[] = { "deadbeef", NULL, NULL, NULL, "DeaDBeeF-devel" };
 static const char *cmd_deluge[] = { "deluge-gtk", NULL, NULL, NULL, "Deluge" };
-static const char *cmd_dmenu[] = { "launcher", dmenumon, "dmenu", "-s", dmenumon, "-fn", dmenufont, "-w", dmenu_width, "-h", dmenu_lheight, "-l", dmenu_lines, "-nb", colors[4][2], "-nf", colors[4][1], "-sb", colors[5][2], "-sf", colors[5][1], "-centerx", "-centery", NULL };
+static const char *cmd_dmenu[] = { "launcher", dmenumon, "dmenu", "-s", dmenumon, "-fn", dmenufont, "-w", dmenu_width, "-h", dmenu_lheight, "-l", dmenu_lines, "-nb", colors[5][2], "-nf", colors[5][1], "-sb", colors[6][2], "-sf", colors[6][1], "-centerx", "-centery", NULL };
 static const char *cmd_sublime[] = { "subl3", NULL, NULL, NULL, "Subl3" };
 static const char *cmd_term[]  = { "termite", NULL };
 static const char *cmd_weechat[]  = { "termite", "--title", "weechat", "-e", "weechat", NULL, NULL, NULL,  "weechat" };
 static const char *kb_backlightdec[] = { "xbacklight", "-dec", "2", NULL };
 static const char *kb_backlightinc[] = { "xbacklight", "-inc", "10", NULL };
 static const char *kb_launcher1[] = { "xbacklight", "-dec", "10", NULL };
-/*static const char *kb_launcher2[] = { "xbacklight", "-dec", "10", NULL };*/
+static const char *kb_launcher2[] = { "togglepad", NULL, NULL };
 static const char *kb_lightoff[] = { "keyboard_actions/fn_kbd_backlight_off", NULL };
 static const char *kb_lighton[] = { "keyboard_actions/fn_kbd_backlight_on", NULL };
 static const char *kb_audio_prev[] = { "deadbeef", "--prev", NULL };
@@ -135,8 +138,8 @@ static Key keys[] = {
 	
 	/* Commands */
 	{ MODKEY,                       XK_space,   spawn,          {.v = cmd_dmenu } },
-	{ MODKEY|ShiftMask,             XK_Return, 	spawn,          {.v = cmd_term } },
-	{ MODKEY,			                  XK_x, 	   	runorraise,     {.v = cmd_browser } },
+	{ MODKEY|ShiftMask,            XK_Return, 	spawn,          {.v = cmd_term } },
+	{ MODKEY,			           XK_x, 	   	runorraise,     {.v = cmd_browser } },
 	
 	/* General */
 	{ MODKEY|ShiftMask,             XK_b,      	togglebar,      {0} },
@@ -184,7 +187,8 @@ static Key keys[] = {
   { 0, XF86AudioMute,        				   	spawn,          {.v = kb_audio_mute } },
   { 0, XF86AudioLowerVolume, 				   	spawn,          {.v = kb_audio_vold } },
   { 0, XF86AudioRaiseVolume, 				   	spawn,          {.v = kb_audio_volu } },
-  { 0, XF86LauncherKB1,          			  spawn,          {.v = kb_launcher1 } },
+  { 0, XF86LauncherKB1,                 spawn,          {.v = kb_launcher1 } },
+  { 0, XF86LauncherKB2,          			  spawn,          {.v = kb_launcher2 } },
 
   /* Forever alone, quits. */
   { MODKEY|ShiftMask,             XK_q,		    quit,         {0} },
