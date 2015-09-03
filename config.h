@@ -19,24 +19,24 @@ static const char *fonts[] = {
     "Siji:size=10",
     "Anonymous Pro for Powerline-10:style=bold", 
 };
-#define NUMCOLORS 8
+#define NUMCOLORS 9
 
 static const char colors[NUMCOLORS][MAXCOLORS][8] = {
    // border   foreground  background
    { "#282828", "#887e75", "#181818" },  // 0 = normal
-   { "#dc9656", "#d8d8d8", "#181818" },  // 1 = selected 
-   { "#dc9656", "#dc9656", "#181818" },  // 2 = active 
+   { "#dc9656", "#d6b89c", "#010101" },  // 1 = selected 
+   { "#dc9656", "#dc9656", "#010101" },  // 2 = active 
    { "#ff0000", "#ffffff", "#181818" },  // 3 = urgent
    { "#ff0000", "#ffffff", "#181818" },  // 4 = error
    { "#ff0000", "#fc5571", "#111111" },  // 5 = layout
-   { "#ff9900", "#887e75", "#181818" },  // 6 = dmenu - normal
-   { "#ff9900", "#181818", "#dc9656" },  // 7 = dmenu - selected
+   { "#ff0000", "#555555", "#111111" },  // 6 = inactive
+   { "#ff9900", "#887e75", "#181818" },  // 7 = dmenu - normal
+   { "#ff9900", "#181818", "#dc9656" },  // 8 = dmenu - selected
    // add more here
 };
 
-static const unsigned int barpadding      = 6;        /* adds top padding to bar */
-static const unsigned int tagpadding      = 6;        /* adds padding to tags */
-static const unsigned int rectpadding     = 2;        /* selector padding +xy */
+static const unsigned int barpadding      = 8;        /* adds top padding to bar */
+static const unsigned int tagpadding      = 10;        /* adds padding to tags */
 static const unsigned int borderpx        = 3;        /* border pixel of windows */
 static const unsigned int snap            = 32;       /* snap pixel */
 static const Bool showbar                 = True;     /* False means no bar */
@@ -49,15 +49,15 @@ static const Bool viewontag               = False;     /* Switch view on tag swi
 
 /* tagging */
 static const char *tags[] = {
-    "1 \uE60D", /* 01 - misc kk*/
-    "2 \uE68B", /* 02 - web ok*/
-    "3 \uE685", /* 03 - dev ok*/
-    "4 \uE67D", /* 04 - text */
-    "5 \uE61C", /* 05 - music kk*/
-    "6 \uE6CD", /* 06 - media ok*/ 
-    "7 \uE6CB", /* 07 - files & transfers kk*/
-    "8 \uE71D", /* 08 - chats kk*/
-    "9 \uE6CC", /* 09 - news & mail  kk*/
+    "1 \uE60D ", /* 01 - misc */
+    "2 \uE68B ", /* 02 - web */
+    "3 \uE685 ", /* 03 - dev */
+    "4 \uE67D ", /* 04 - text */
+    "5 \uE61C ", /* 05 - music */
+    "6 \uE6CD ", /* 06 - media */ 
+    "7 \uE6CB ", /* 07 - files & transfers */
+    "8 \uE71D ", /* 08 - chats */
+    "9 \uE6CC ", /* 09 - news & mail */
 };
 
 static const Rule rules[] = {
@@ -117,7 +117,7 @@ static const char *cmd_cherrytree[] = { "cherrytree", NULL, NULL, NULL, "CherryT
 static const char *cmd_chrome[] = { "chromium", NULL, NULL, NULL, "Chromium" };
 static const char *cmd_deadbeef[] = { "deadbeef", NULL, NULL, NULL, "DeaDBeeF-devel" };
 static const char *cmd_deluge[] = { "deluge-gtk", NULL, NULL, NULL, "Deluge" };
-static const char *cmd_dmenu[] = { "launcher", dmenumon, "dmenu", "-s", dmenumon, "-fn", dmenufont, "-w", dmenu_width, "-h", dmenu_lheight, "-l", dmenu_lines, "-nb", colors[5][2], "-nf", colors[5][1], "-sb", colors[6][2], "-sf", colors[6][1], "-centerx", "-centery", NULL };
+static const char *cmd_dmenu[] = { "launcher", dmenumon, "dmenu", "-s", dmenumon, "-fn", dmenufont, "-w", dmenu_width, "-h", dmenu_lheight, "-l", dmenu_lines, "-nb", colors[7][2], "-nf", colors[7][1], "-sb", colors[8][2], "-sf", colors[8][1], "-centerx", "-centery", NULL };
 static const char *cmd_sublime[] = { "subl3", NULL, NULL, NULL, "Subl3" };
 static const char *cmd_term[]  = { "termite", NULL };
 static const char *cmd_weechat[]  = { "termite", "--title", "weechat", "-e", "weechat", NULL, NULL, NULL,  "weechat" };

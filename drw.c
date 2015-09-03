@@ -252,6 +252,15 @@ drw_sep(Drw *drw, int x, int y, unsigned int w, unsigned int h) {
 	XDrawLine(drw->dpy, drw->drawable, drw->gc, x, y, w, h);
 }
 
+void
+drw_topsep(Drw *drw, int x, int y, unsigned int w, unsigned int h) {
+
+	if(!drw || !drw->fontcount || !drw->scheme)
+		return;
+	XSetForeground(drw->dpy, drw->gc, 0x0232323);
+	XDrawLine(drw->dpy, drw->drawable, drw->gc, x, y, w, h);
+}
+
 int
 drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, const char *text, int pad) {
 	char buf[1024];

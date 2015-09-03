@@ -46,7 +46,7 @@ Patches
 * emptyview - done
   There's something annoying about not being able to toggle that last tag out of view.. 
 
-* statuscolors
+* statuscolors - done
 
 
 * ispermanent - wip
@@ -55,19 +55,24 @@ Patches
 * swap focus - wip
   Allows you to switch focus with a single shortcut
 
-* occupiedcol - uncertain
-  I dont know, not the original patch, but something similar, maybe..
-
-
 
 Modifications
 ----------------------------
-* keeptags
+* keeptags - done
   Tags should be kept when moving clients between displays
 
-* runorraise
+* runorraise - done
   - checks for running applications by window title aswell as names
   - changed it to toggleview 
 
 * borderfix  (ref3)
   border was applied wo all windows when reattaching floating windows. 
+
+* layoutfirst - done
+  layout icon is shown first in menu and has it's own colorsettings
+
+* notoccupied - done
+  special color for when tag is not occupied (removes rect-indicator)
+
+* raisetags
+  activate tag if not active when moving windows between displays.

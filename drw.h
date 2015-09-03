@@ -70,6 +70,7 @@ void drw_setscheme(Drw *drw, ClrScheme *scheme);
 int drw_colored_text(Drw *drw, ClrScheme *scheme, int numcolors, int x, int y, unsigned int w, unsigned int h, char *text);
 void drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h, int filled, int empty);
 void drw_sep(Drw *drw, int x, int y, unsigned int w, unsigned int h);
+void drw_topsep(Drw *drw, int x, int y, unsigned int w, unsigned int h);
 int drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, const char *text, int pad);
 
 /* Map functions */

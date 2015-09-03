@@ -761,10 +761,13 @@ drawbar(Monitor *m) {
 		if(!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
 			continue;
 		w = TEXTW(tags[i]) + tagpadding;
-		drw_setscheme(drw, &scheme[(m->tagset[m->seltags] & 1 << i) ? (selmon && selmon->sel && selmon->sel->tags & 1 << i ? 2 : 1 ) : (urg & 3 << i ? 3 : 0)]);
+		/* Color occupied tag */
+		if(!(occ & 1 << i)){
+			drw_setscheme(drw, &scheme[6]);
+		} else {
+			drw_setscheme(drw, &scheme[(m->tagset[m->seltags] & 1 << i) ? (selmon && selmon->sel && selmon->sel->tags & 1 << i ? 2 : 1 ) : (urg & 3 << i ? 3 : 0)]);
+		}
 		drw_text(drw, x, 0, w, bh, tags[i], tagpadding);
-		drw_rect(drw, x + rectpadding, rectpadding, w, bh, m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
-		          occ & 1 << i);
 		drw_sep(drw, x+w-1, 1, x+w-1, bh);
 		x += w;
 	}
@@ -782,6 +785,7 @@ drawbar(Monitor *m) {
 		drw_setscheme(drw, &scheme[0]);
 		drw_text(drw, x, 0, w, bh, NULL, 0);
 	}
+	drw_topsep(drw, 0, 0, m->ww, 1);
 	drw_map(drw, m->barwin, 0, 0, m->ww, bh);
 }
 
