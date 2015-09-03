@@ -446,7 +446,7 @@ buttonpress(XEvent *e) {
 		focus(NULL);
 	}
 	if(ev->window == selmon->barwin) {
-		i = x = 0;
+		i = 0; x = TEXTW(m->ltsymbol);
 		unsigned int occ = 0;
 		for(c = m->clients; c; c = c->next)
 			occ |= c->tags;
@@ -456,12 +456,13 @@ buttonpress(XEvent *e) {
 				continue;
 			x += TEXTW(tags[i]) + tagpadding;
 		} while(ev->x >= x && ++i < LENGTH(tags));
-		if(i < LENGTH(tags)) {
+		if(ev->x < blw) {
+			click = ClkLtSymbol;
+		}
+		else if(i < LENGTH(tags)) {
 			click = ClkTagBar;
 			arg.ui = 1 << i;
 		}
-		else if(ev->x < x + blw + tagpadding)
-			click = ClkLtSymbol;
 		else
 			click = ClkStatusText;
 	}
@@ -750,6 +751,11 @@ drawbar(Monitor *m) {
 	}
 
 	x = 0;
+	w = blw = TEXTW(m->ltsymbol) + 7; /* hc lttag padding */
+	drw_setscheme(drw, &scheme[5]);
+	drw_text(drw, x, 2, w, bh, m->ltsymbol, 0);
+	drw_sep(drw, x+w-1, 1, x+w-1, bh);
+	x += w;
 	for(i = 0; i < LENGTH(tags); i++) {
 		/* do not draw vacant tags */
 		if(!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
@@ -762,11 +768,8 @@ drawbar(Monitor *m) {
 		drw_sep(drw, x+w-1, 1, x+w-1, bh);
 		x += w;
 	}
-	w = blw = TEXTW(m->ltsymbol);
-	drw_setscheme(drw, &scheme[0]);
-	drw_text(drw, x, 0, w, bh, m->ltsymbol, 0);
-	x += w;
 	xx = x;
+	drw_setscheme(drw, &scheme[0]);
 	w = TEXTW(stext);
 	x = m->ww - w;
 	if(x < xx) {
@@ -1156,8 +1159,8 @@ monocle(Monitor *m) {
 	for(c = m->clients; c; c = c->next)
 		if(ISVISIBLE(c))
 			n++;
-	if(n > 0) /* override layout symbol */
-		snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n);
+	/* if(n > 0)  override layout symbol */
+	/*	snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n); */
 	for(c = nexttiled(m->clients); c; c = nexttiled(c->next))
 		resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, False);
 }

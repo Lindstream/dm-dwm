@@ -19,7 +19,7 @@ static const char *fonts[] = {
     "Siji:size=10",
     "Anonymous Pro for Powerline-10:style=bold", 
 };
-#define NUMCOLORS 7
+#define NUMCOLORS 8
 
 static const char colors[NUMCOLORS][MAXCOLORS][8] = {
    // border   foreground  background
@@ -28,8 +28,9 @@ static const char colors[NUMCOLORS][MAXCOLORS][8] = {
    { "#dc9656", "#dc9656", "#181818" },  // 2 = active 
    { "#ff0000", "#ffffff", "#181818" },  // 3 = urgent
    { "#ff0000", "#ffffff", "#181818" },  // 4 = error
-   { "#ff9900", "#887e75", "#181818" },  // 5 = dmenu - normal
-   { "#ff9900", "#181818", "#dc9656" },  // 6 = dmenu - selected
+   { "#ff0000", "#fc5571", "#111111" },  // 5 = layout
+   { "#ff9900", "#887e75", "#181818" },  // 6 = dmenu - normal
+   { "#ff9900", "#181818", "#dc9656" },  // 7 = dmenu - selected
    // add more here
 };
 
