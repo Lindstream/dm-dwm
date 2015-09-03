@@ -759,6 +759,7 @@ drawbar(Monitor *m) {
 		drw_text(drw, x, 0, w, bh, tags[i], tagpadding);
 		drw_rect(drw, x + rectpadding, rectpadding, w, bh, m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
 		          occ & 1 << i);
+		drw_sep(drw, x+w-1, 1, x+w-1, bh);
 		x += w;
 	}
 	w = blw = TEXTW(m->ltsymbol);

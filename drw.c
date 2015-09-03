@@ -241,6 +241,17 @@ drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h, int filled, int
 		XDrawRectangle(drw->dpy, drw->drawable, drw->gc, x+1, y+1, dx, dx);
 }
 
+void
+drw_sep(Drw *drw, int x, int y, unsigned int w, unsigned int h) {
+
+	if(!drw || !drw->fontcount || !drw->scheme)
+		return;
+	XSetForeground(drw->dpy, drw->gc, 0x0111111);
+	XDrawLine(drw->dpy, drw->drawable, drw->gc, x-1, y, w-1, h);
+	XSetForeground(drw->dpy, drw->gc, 0x0232323);
+	XDrawLine(drw->dpy, drw->drawable, drw->gc, x, y, w, h);
+}
+
 int
 drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, const char *text, int pad) {
 	char buf[1024];
