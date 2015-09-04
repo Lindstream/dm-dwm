@@ -446,7 +446,7 @@ buttonpress(XEvent *e) {
 		focus(NULL);
 	}
 	if(ev->window == selmon->barwin) {
-		i = 0; x = TEXTW(m->ltsymbol);
+		i = 0; x = TEXTW(m->ltsymbol) + ltmargin;
 		unsigned int occ = 0;
 		for(c = m->clients; c; c = c->next)
 			occ |= c->tags;
@@ -751,7 +751,7 @@ drawbar(Monitor *m) {
 	}
 
 	x = 0;
-	w = blw = TEXTW(m->ltsymbol) + 14; /* hc lttag padding */
+	w = blw = TEXTW(m->ltsymbol) + ltmargin; /* hc lttag padding */
 	drw_setscheme(drw, &scheme[5]);
 	drw_text(drw, x, 0, w, bh, m->ltsymbol, 0);
 	drw_sep(drw, x+w-1, 1, x+w-1, bh);

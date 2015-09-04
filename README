@@ -1,5 +1,5 @@
-Lindstreams DWM config
-============================
+Lindstreams Dream Machine DWM config
+==============================
 dwm is an extremely fast, small, and dynamic window manager for X. 
 
 Think I've found my ultimate patchset, lets roll.. 
@@ -48,7 +48,6 @@ Patches
 
 * statuscolors - done
 
-
 * ispermanent - wip
   Hinders accidental termination of clients
 
@@ -60,6 +59,9 @@ Modifications
 ----------------------------
 * keeptags - done
   Tags should be kept when moving clients between displays
+
+* raisetags - wip
+  activate tag if not active when moving windows between displays.
 
 * runorraise - done
   - checks for running applications by window title aswell as names
@@ -73,6 +75,3 @@ Modifications
 
 * notoccupied - done
   special color for when tag is not occupied (removes rect-indicator)
-
-* raisetags
-  activate tag if not active when moving windows between displays.

@@ -22,25 +22,26 @@ static const char *fonts[] = {
 
 static const char colors[NUMCOLORS][MAXCOLORS][8] = {
    // border   foreground  background
-   { "#282828", "#887e75", "#181818" },  // 0 = normal
-   { "#dc9656", "#d6b89c", "#010101" },  // 1 = selected 
-   { "#dc9656", "#dc9656", "#010101" },  // 2 = active 
-   { "#ff0000", "#ffffff", "#181818" },  // 3 = urgent
-   { "#ff0000", "#ffffff", "#181818" },  // 4 = error
-   { "#ff0000", "#fc5571", "#111111" },  // 5 = layout
-   { "#ff0000", "#555555", "#111111" },  // 6 = inactive
-   { "#ff9900", "#887e75", "#181818" },  // 7 = dmenu - normal
-   { "#ff9900", "#181818", "#dc9656" },  // 8 = dmenu - selected
+   { "#282828", "#887e75", "#181818" },  // 0 = base
+   { "#dc9656", "#d6b89c", "#0f0f0f" },  // 1 = active
+   { "#dc9656", "#dc9656", "#231c01" },  // 2 = selected
+   { "#ff0000", "#cc5157", "#181818" },  // 3 = urgent
+   { "#ff0000", "#ff0000", "#181818" },  // 4 = error
+   { "#ff0000", "#4ba0d1", "#111111" },  // 5 = layout
+   { "#ff0000", "#555555", "#181818" },  // 6 = inactive
+   { "#ff9900", "#887e75", "#282828" },  // 7 = dmenu - normal
+   { "#ff9900", "#dc9656", "#231c01" },  // 8 = dmenu - selected
    // add more here
 };
 
-static const unsigned int barpadding      = 12;        /* adds top padding to bar */
+static const unsigned int barpadding      = 12;       /* adds top padding to bar */
 static const unsigned int tagpadding      = 0;        /* adds padding to tags */
+static const unsigned int ltmargin        = 14;        /* adds right margin to lticon */
 static const unsigned int borderpx        = 3;        /* border pixel of windows */
 static const unsigned int snap            = 32;       /* snap pixel */
 static const Bool showbar                 = True;     /* False means no bar */
 static const Bool topbar                  = False;    /* False means bottom bar */
-static const unsigned int gappx           = 0;        /* gap pixel between windows */
+static const unsigned int gappx           = 1;        /* gap pixel between windows */
 
 
 /* behavior */ 
@@ -104,7 +105,7 @@ static const Layout layouts[] = {
 /* dmenu */
 static char dmenumon[2]             = "0"; /* component of dmenucmd, manipulated in spawn() */
 
-static const char dmenufont[]       = "AndaleMono-10";
+static const char dmenufont[]       = "Anonymous-Pro-for-Powerline:size=10:style=bold";
 
 static const char dmenu_width[]    = "400";  
 static const char dmenu_lheight[]  = "25";  
