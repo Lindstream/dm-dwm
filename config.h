@@ -16,8 +16,7 @@
 /* appearance */
 static const char *fonts[] = {
     "AnonMix:size=12",
-    "Siji:size=10",
-    "Anonymous Pro for Powerline-10:style=bold", 
+    "Anonymous Pro for Powerline-10:style=bold",
 };
 #define NUMCOLORS 9
 
@@ -35,8 +34,8 @@ static const char colors[NUMCOLORS][MAXCOLORS][8] = {
    // add more here
 };
 
-static const unsigned int barpadding      = 8;        /* adds top padding to bar */
-static const unsigned int tagpadding      = 10;        /* adds padding to tags */
+static const unsigned int barpadding      = 12;        /* adds top padding to bar */
+static const unsigned int tagpadding      = 0;        /* adds padding to tags */
 static const unsigned int borderpx        = 3;        /* border pixel of windows */
 static const unsigned int snap            = 32;       /* snap pixel */
 static const Bool showbar                 = True;     /* False means no bar */
@@ -49,15 +48,15 @@ static const Bool viewontag               = False;     /* Switch view on tag swi
 
 /* tagging */
 static const char *tags[] = {
-    "1 \uE60D ", /* 01 - misc */
-    "2 \uE68B ", /* 02 - web */
-    "3 \uE685 ", /* 03 - dev */
-    "4 \uE67D ", /* 04 - text */
-    "5 \uE61C ", /* 05 - music */
-    "6 \uE6CD ", /* 06 - media */ 
-    "7 \uE6CB ", /* 07 - files & transfers */
-    "8 \uE71D ", /* 08 - chats */
-    "9 \uE6CC ", /* 09 - news & mail */
+    "1 \uE60D  ", /* 01 - misc */
+    "2 \uE68B  ", /* 02 - web */
+    "3 \uE685  ", /* 03 - dev */
+    "4 \uE67D  ", /* 04 - text */
+    "5 \uE61C  ", /* 05 - music */
+    "6 \uE6CD  ", /* 06 - media */ 
+    "7 \uE6CB  ", /* 07 - files & transfers */
+    "8 \uE71D  ", /* 08 - chats */
+    "9 \uE6CC  ", /* 09 - news & mail */
 };
 
 static const Rule rules[] = {
@@ -71,7 +70,7 @@ static const Rule rules[] = {
   { "Deluge",            NULL,       NULL,              1 << 7,       True,       True,        1 },
   { "Firefox",           NULL,       NULL,              1 << 1,       False,      False,       1 },
   { "Chromium",          NULL,       NULL,              1 << 1,       False,      False,       1 },
-  { "Termite",           NULL,       "weechat",         1 << 6,       False,      False,       2 },
+  { "Termite",           NULL,       "weechat",         1 << 7,       False,      False,       2 },
   {  NULL,               NULL,       "glances",         1 << 4,       False,      False,       1 },
   { "Subl3",             NULL,       NULL,              1 << 2,       False,      False,       1 },
   { "GIMP",              NULL,       NULL,              1 << 4,       False,      False,       0 },
@@ -84,10 +83,10 @@ static const Bool resizehints = False; /* True means respect size hints in tiled
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "\uE002",      tile },    /* first entry is default */
-  { "\uE001",      monocle },
-	{ "\uE006",      NULL },    /* no layout function means floating behavior */
-  { "\uE003",      htile },
+	{ "\uE701",      tile },    /* first entry is default */
+  { "\uE6FE",      monocle },
+	{ "\uE6FF",      NULL },    /* no layout function means floating behavior */
+  { "\uE700",      htile },
 
 };
 

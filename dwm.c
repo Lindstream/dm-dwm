@@ -751,9 +751,9 @@ drawbar(Monitor *m) {
 	}
 
 	x = 0;
-	w = blw = TEXTW(m->ltsymbol) + 7; /* hc lttag padding */
+	w = blw = TEXTW(m->ltsymbol) + 14; /* hc lttag padding */
 	drw_setscheme(drw, &scheme[5]);
-	drw_text(drw, x, 2, w, bh, m->ltsymbol, 0);
+	drw_text(drw, x, 0, w, bh, m->ltsymbol, 0);
 	drw_sep(drw, x+w-1, 1, x+w-1, bh);
 	x += w;
 	for(i = 0; i < LENGTH(tags); i++) {
