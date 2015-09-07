@@ -2,7 +2,7 @@ Dream Machine - DWM
 ==============================
 dwm is an extremely fast, small, and dynamic window manager for X. 
 
-Based of DWM head from 2015-03-13 (commit 14343e69cc5), tweaked and configured to personal preference.
+Based of DWM 6.1 head from 2015-03-13 (commit 14343e69cc5), tweaked and configured to personal preference.
 
 This is part of Lindstreams Dream Machine, read more @ link.
 
@@ -12,7 +12,7 @@ Patches
   Best thing since sliced bread, this patch adds a FIFO command/controller (/tmp/dwm.fifo) to exec keybind actions through CLI.
 
 * **hide vacant tags**  
-  Pretty self-explainatory :)
+  Pretty self-explanatory :)
 
 * **statusallmons**  
   Makes the statusbar available on all displays.
@@ -30,7 +30,7 @@ Patches
   Nowamore nicknamed htile
 
 * **center**  
-  Adds an “iscentered” rule to automatically center clients on the current monitor.
+  Adds an iscentered rule to automatically center clients on the current monitor.
 
 * **statuscolors**  
   Adds a few more colors to dwm's palette.
@@ -39,7 +39,7 @@ Patches
   Super + ShiftR takes you back to your master client.
 
 * **uselessgaps**  
-  Adds the possibillity to gap windows, also takes care of border in monocle and fullscreen mode.
+  Adds the possibility to gap windows, also takes care of border in monocle and fullscreen mode.
 
 * **viewontag**  
   Follow a window to the tag it's being moved to, can't really decide on this one - option is set in config.h (needs fixing, indifferent to current tag status).
@@ -68,7 +68,7 @@ Other modifications
   border was applied to all windows when reattaching floating windows. 
 
 * **layoutfirst**  
-  layout icon is shown first in menu and has it's own colorsettings
+  layout icon is shown first in menu and has its own colorsettings
 
 * **notoccupied**  
   special color when tags are active but unoccupied (removed rect-indicator)
