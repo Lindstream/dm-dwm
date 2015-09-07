@@ -2,18 +2,18 @@ Dream Machine - DWM
 ==============================
 dwm is an extremely fast, small, and dynamic window manager for X. 
 
-Think I've found my ultimate patchset, lets roll.. 
+Based of DWM head from 2015-03-13 (commit 14343e69cc5), tweaked and configured to my personal preference.
 
 Patches
 ----------------------------
 * dwmfifo - done
-  Best thing since sliced bread, this patch adds a FIFO command/controller (/tmp/dwm.fifo) to dwm that allows you controll keybind actions through CLI.
+  Best thing since sliced bread, this patch adds a FIFO command/controller (/tmp/dwm.fifo) to exec keybind actions through CLI.
 
 * hide vacant tags - done
   Pretty self-explainatory :)
 
 * statusallmons - done
-  Makes the statusbar available on all displays, and keeps it fresh!
+  Makes the statusbar available on all displays.
 
 * runorraise - done
   Allows you to map frequently used apps to a key combo that will launch the application if it's not already running - otherwise bring the running session into focus. Great stuff to use with browsers and notes.
@@ -56,12 +56,12 @@ Other modifications
   Tags should be kept when moving clients between displays
 
 * raisetags - done 
-  toggle view if not active when moving windows between displays.
+  - toggle view if not active when moving clients between display
+  - toggle view if client isn't visible after launch
 
-* runorraise
-  - checks by window title aswell as names - done
-  - changed it to toggleview - done
-  - toggle view if client isn't visible - wip
+* runorraise -done
+  - checks by window title aswell as names
+  - changed to toggleview
 
 * borderfix - done
   border was applied to all windows when reattaching floating windows. 
@@ -73,6 +73,7 @@ Other modifications
   special color when tags are active but unoccupied (removed rect-indicator)
 
 * setting for monoclecounter - done
+
 
 Dirty shines
 ----------------------------
