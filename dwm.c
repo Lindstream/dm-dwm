@@ -1336,10 +1336,14 @@ resizeclient(Client *c, int x, int y, int w, int h) {
 
     	// Remove border and gap if layout 
     	// is monocle or only one client && !mons->next
+    	// is monocle or only one client && mons->next
 		if ((selmon->lt[selmon->sellt]->arrange == monocle || n == 1) && !mons->next) {
       		gapoffset = 0;
       		gapincr = -2 * borderpx ;
 	    	wc.border_width = 0;
+	    } else if ((selmon->lt[selmon->sellt]->arrange == monocle || n == 1) && mons->next) {
+      		gapoffset = 0;
+      		gapincr = 0;
     	} else {
       		gapoffset = gappx ;
       		gapincr = 2 * gappx ;

@@ -64,9 +64,9 @@ Other tweaks
   * checks by window title aswell as names
   * changed to toggleview
 
-* **borderfix**  
-  * single screen: borders hidden on single clients and in monocle.
-  * multi-screen: borders shown 
+* **borders & gaps**  
+  * single screen: borders & gaps hidden on single clients and in monocle mode.
+  * multi-screen: borders shown allways, gaps hidden in monocle and on single clients. 
 
 * **layoutfirst**  
   layout icon is shown first in menu and has its own colorsettings
