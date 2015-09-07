@@ -43,6 +43,7 @@ static const Bool showbar                 = True;     /* False means no bar */
 static const Bool topbar                  = False;    /* False means bottom bar */
 static const unsigned int gappx           = 1;        /* gap pixel between windows */
 static const Bool viewontag               = False;    /* switch view on tag switch */
+static const Bool monoclecount            = False;    /* show no. of clients in monocle layout */
 
 /* tagging */
 static const char *tags[] = {

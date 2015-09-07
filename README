@@ -55,14 +55,15 @@ Other modifications
 * keeptags - done
   Tags should be kept when moving clients between displays
 
-* raisetags - wip
-  activate tag if not active when moving windows between displays.
+* raisetags - done 
+  toggle view if not active when moving windows between displays.
 
-* runorraise - done
-  - checks for running applications by window title aswell as names
-  - changed it to toggleview 
+* runorraise
+  - checks by window title aswell as names - done
+  - changed it to toggleview - done
+  - toggle view if client isn't visible - wip
 
-* borderfix  (ref3)
+* borderfix - done
   border was applied to all windows when reattaching floating windows. 
 
 * layoutfirst - done
@@ -70,7 +71,8 @@ Other modifications
 
 * notoccupied - done
   special color when tags are active but unoccupied (removed rect-indicator)
-  
+
+* setting for monoclecounter - done
 
 Dirty shines
 ----------------------------

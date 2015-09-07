@@ -846,7 +846,7 @@ focus(Client *c) {
 		detachstack(c);
 		attachstack(c);
 		grabbuttons(c, True);
-		XSetWindowBorder(dpy, c->win, scheme[1].border->pix); /*REF4 - float-border */
+		XSetWindowBorder(dpy, c->win, scheme[1].border->pix); /* float-border */
 		setfocus(c);
 	}
 	else {
@@ -1163,8 +1163,8 @@ monocle(Monitor *m) {
 	for(c = m->clients; c; c = c->next)
 		if(ISVISIBLE(c))
 			n++;
-	/* if(n > 0)  override layout symbol */
-	/*	snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n); */
+	if(n > 0 && monoclecount)  /* override layout symbol */
+		snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n); 
 	for(c = nexttiled(m->clients); c; c = nexttiled(c->next))
 		resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, False);
 }
@@ -1516,19 +1516,19 @@ scan(void) {
 
 void
 sendmon(Client *c, Monitor *m) {
+	unsigned int newtagset;
 	if(c->mon == m)
 		return;
 	unfocus(c, True);
 	detach(c);
 	detachstack(c);
 	c->mon = m;
-	/* c->tags = m->tagset[m->seltags];  assign tags of target monitor */
 	c->tags = (c->tags ? c->tags : 1); /* keeptags */
-                
+	c->mon->tagset[c->mon->seltags] |= c->tags; /* raisetags */
 	attach(c);
 	attachstack(c);
-	focus(NULL);
-	arrange(NULL);
+	focus(c);
+	arrange(selmon);
 }
 
 void
@@ -2167,7 +2167,6 @@ wintomon(Window w) {
 	int x, y;
 	Client *c;
 	Monitor *m;
-
 	if(w == root && getrootptr(&x, &y))
 		return recttomon(x, y, 1, 1);
 	for(m = mons; m; m = m->next)
