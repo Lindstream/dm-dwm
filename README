@@ -1,4 +1,4 @@
-Lindstreams Dream Machine DWM config
+Dream Machine - DWM
 ==============================
 dwm is an extremely fast, small, and dynamic window manager for X. 
 
@@ -13,8 +13,7 @@ Patches
   Pretty self-explainatory :)
 
 * statusallmons - done
-  Makes the statusbar available to all displays.
-  thinking about switching to: http://dwm.suckless.org/patches/multimon
+  Makes the statusbar available on all displays, and keeps it fresh!
 
 * runorraise - done
   Allows you to map frequently used apps to a key combo that will launch the application if it's not already running - otherwise bring the running session into focus. Great stuff to use with browsers and notes.
@@ -31,31 +30,27 @@ Patches
 * center - done
   Adds an “iscentered” rule to automatically center clients on the current monitor.
 
-* urgent & float colors - scrapped
+* statuscolors - done
   Adds a few more colors to dwm's palette.
 
 * focusmaster - done
   Super + ShiftR takes you back to your master client.
 
-* uselessgaps- done
+* uselessgaps - done
   Adds the possibillity to gap windows, also takes care of border in monocle and fullscreen mode.
 
 * viewontag - done
   Follow a window to the tag it's being moved to, can't really decide on this one - option is set in config.h
+  - Needs fixing, indifferent to current tag status.
 
 * emptyview - done
   There's something annoying about not being able to toggle that last tag out of view.. 
-
-* statuscolors - done
-
-* ispermanent - wip
-  Hinders accidental termination of clients
 
 * swap focus - wip
   Allows you to switch focus with a single shortcut
 
 
-Modifications
+Other modifications
 ----------------------------
 * keeptags - done
   Tags should be kept when moving clients between displays
@@ -68,10 +63,19 @@ Modifications
   - changed it to toggleview 
 
 * borderfix  (ref3)
-  border was applied wo all windows when reattaching floating windows. 
+  border was applied to all windows when reattaching floating windows. 
 
 * layoutfirst - done
   layout icon is shown first in menu and has it's own colorsettings
 
 * notoccupied - done
-  special color for when tag is not occupied (removes rect-indicator)
+  special color when tags are active but unoccupied (removed rect-indicator)
+  
+
+Dirty shines
+----------------------------
+* separators between tags
+  Hardcoded colors in drw > drw_sep()
+
+* top line
+  Hardcoded colors in drw > drw_topsep()

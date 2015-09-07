@@ -15,8 +15,8 @@
 
 /* appearance */
 static const char *fonts[] = {
-    "AnonMix:size=12",
-    "Anonymous Pro for Powerline-10:style=bold",
+    "AnonMix:size=11",
+    "Andale Mono-9:style=bold",
 };
 #define NUMCOLORS 9
 
@@ -24,11 +24,11 @@ static const char colors[NUMCOLORS][MAXCOLORS][8] = {
    // border   foreground  background
    { "#282828", "#887e75", "#181818" },  // 0 = base
    { "#dc9656", "#d6b89c", "#0f0f0f" },  // 1 = active
-   { "#dc9656", "#dc9656", "#231c01" },  // 2 = selected
-   { "#ff0000", "#cc5157", "#181818" },  // 3 = urgent
-   { "#ff0000", "#ff0000", "#181818" },  // 4 = error
-   { "#ff0000", "#4ba0d1", "#111111" },  // 5 = layout
-   { "#ff0000", "#555555", "#181818" },  // 6 = inactive
+   { "#dc9656", "#dc9656", "#0f0f0f" },  // 2 = selected
+   { "#ff0000", "#d6d47a", "#181818" },  // 3 = urgent
+   { "#ff0000", "#cc5157", "#181818" },  // 4 = error
+   { "#ff0000", "#887e75", "#181818" },  // 5 = layout
+   { "#ff0000", "#444444", "#181818" },  // 6 = inactive
    { "#ff9900", "#887e75", "#282828" },  // 7 = dmenu - normal
    { "#ff9900", "#dc9656", "#231c01" },  // 8 = dmenu - selected
    // add more here
@@ -36,16 +36,13 @@ static const char colors[NUMCOLORS][MAXCOLORS][8] = {
 
 static const unsigned int barpadding      = 12;       /* adds top padding to bar */
 static const unsigned int tagpadding      = 0;        /* adds padding to tags */
-static const unsigned int ltmargin        = 14;        /* adds right margin to lticon */
+static const unsigned int ltmargin        = 12;       /* adds right margin to lticon */
 static const unsigned int borderpx        = 3;        /* border pixel of windows */
 static const unsigned int snap            = 32;       /* snap pixel */
 static const Bool showbar                 = True;     /* False means no bar */
 static const Bool topbar                  = False;    /* False means bottom bar */
 static const unsigned int gappx           = 1;        /* gap pixel between windows */
-
-
-/* behavior */ 
-static const Bool viewontag               = False;     /* Switch view on tag switch */
+static const Bool viewontag               = False;    /* switch view on tag switch */
 
 /* tagging */
 static const char *tags[] = {
@@ -68,27 +65,26 @@ static const Rule rules[] = {
   /* class               instance    title              tags mask     iscentered  isfloating   monitor */
   { "CherryTree",        NULL,       NULL,              1 << 3,       False,      False,        1 },
   { "Deadbeef",          NULL,       NULL,              1 << 4,       False,      False,        1 },
-  { "Deluge",            NULL,       NULL,              1 << 7,       True,       True,        1 },
-  { "Firefox",           NULL,       NULL,              1 << 1,       False,      False,       1 },
-  { "Chromium",          NULL,       NULL,              1 << 1,       False,      False,       1 },
-  { "Termite",           NULL,       "weechat",         1 << 7,       False,      False,       2 },
-  {  NULL,               NULL,       "glances",         1 << 4,       False,      False,       1 },
-  { "Subl3",             NULL,       NULL,              1 << 2,       False,      False,       1 },
-  { "GIMP",              NULL,       NULL,              1 << 4,       False,      False,       0 },
+  { "Deluge",            NULL,       NULL,              1 << 7,       False,      False,        1 },
+  { "Firefox",           NULL,       NULL,              1 << 1,       False,      False,        1 },
+  { "Chromium",          NULL,       NULL,              1 << 1,       False,      False,        1 },
+  { "Termite",           NULL,       "weechat",         1 << 7,       False,      False,        2 },
+  {  NULL,               NULL,       "glances",         1 << 4,       False,      False,        1 },
+  { "Subl3",             NULL,       NULL,              1 << 2,       False,      False,        1 },
+  { "GIMP",              NULL,       NULL,              1 << 4,       False,      False,        0 },
 };
 
 /* layout(s) */
-static const float mfact      = 0.65; /* factor of master area size [0.05..0.95] */
+static const float mfact      = 0.60; /* factor of master area size [0.05..0.95] */
 static const int nmaster      = 1;    /* number of clients in master area */
 static const Bool resizehints = False; /* True means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "\uE701",      tile },    /* first entry is default */
-  { "\uE6FE",      monocle },
-	{ "\uE6FF",      NULL },    /* no layout function means floating behavior */
-  { "\uE700",      htile },
-
+  { "\uE6FE",      monocle }, /* monocle */
+	{ "\uE6FF",      NULL },    /* float */
+  { "\uE700",      htile },   /* bottom stack */
 };
 
 /* key definitions */
@@ -103,12 +99,9 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* dmenu */
-static char dmenumon[2]             = "0"; /* component of dmenucmd, manipulated in spawn() */
-
-static const char dmenufont[]       = "Anonymous-Pro-for-Powerline:size=10:style=bold";
-
-static const char dmenu_width[]    = "400";  
-static const char dmenu_lheight[]  = "25";  
+static char dmenumon[2]            = "0"; /* component of dmenucmd, manipulated in spawn() */
+static const char dmenu_width[]    = "500";  
+static const char dmenu_lheight[]  = "32";  
 static const char dmenu_lines[]    = "10";
 
 /* commands */
@@ -117,7 +110,7 @@ static const char *cmd_cherrytree[] = { "cherrytree", NULL, NULL, NULL, "CherryT
 static const char *cmd_chrome[] = { "chromium", NULL, NULL, NULL, "Chromium" };
 static const char *cmd_deadbeef[] = { "deadbeef", NULL, NULL, NULL, "DeaDBeeF-devel" };
 static const char *cmd_deluge[] = { "deluge-gtk", NULL, NULL, NULL, "Deluge" };
-static const char *cmd_dmenu[] = { "launcher", dmenumon, "dmenu", "-s", dmenumon, "-fn", dmenufont, "-w", dmenu_width, "-h", dmenu_lheight, "-l", dmenu_lines, "-nb", colors[7][2], "-nf", colors[7][1], "-sb", colors[8][2], "-sf", colors[8][1], "-centerx", "-centery", NULL };
+static const char *cmd_dmenu[] = { "launcher", dmenumon, "dmenu", "-m", dmenumon, "-w", dmenu_width, "-lh", dmenu_lheight, "-l", dmenu_lines, "-nb", colors[7][2], "-nf", colors[7][1], "-sb", colors[8][2], "-sf", colors[8][1], "-centerx", "-centery", NULL };
 static const char *cmd_sublime[] = { "subl3", NULL, NULL, NULL, "Subl3" };
 static const char *cmd_term[]  = { "termite", NULL };
 static const char *cmd_weechat[]  = { "termite", "--title", "weechat", "-e", "weechat", NULL, NULL, NULL,  "weechat" };
@@ -139,8 +132,8 @@ static Key keys[] = {
 	
 	/* Commands */
 	{ MODKEY,                       XK_space,   spawn,          {.v = cmd_dmenu } },
-	{ MODKEY|ShiftMask,            XK_Return, 	spawn,          {.v = cmd_term } },
-	{ MODKEY,			           XK_x, 	   	runorraise,     {.v = cmd_browser } },
+	{ MODKEY|ShiftMask,             XK_Return, 	spawn,          {.v = cmd_term } },
+	{ MODKEY,			                  XK_x, 	   	runorraise,     {.v = cmd_browser } },
 	
 	/* General */
 	{ MODKEY|ShiftMask,             XK_b,      	togglebar,      {0} },

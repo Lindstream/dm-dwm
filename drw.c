@@ -243,7 +243,6 @@ drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h, int filled, int
 
 void
 drw_sep(Drw *drw, int x, int y, unsigned int w, unsigned int h) {
-
 	if(!drw || !drw->fontcount || !drw->scheme)
 		return;
 	XSetForeground(drw->dpy, drw->gc, 0x0111111);
@@ -254,7 +253,6 @@ drw_sep(Drw *drw, int x, int y, unsigned int w, unsigned int h) {
 
 void
 drw_topsep(Drw *drw, int x, int y, unsigned int w, unsigned int h) {
-
 	if(!drw || !drw->fontcount || !drw->scheme)
 		return;
 	XSetForeground(drw->dpy, drw->gc, 0x0232323);
