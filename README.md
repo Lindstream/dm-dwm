@@ -51,7 +51,7 @@ Patches
   Allows you to switch focus with a single shortcut
 
 
-Other modifications
+Other tweaks
 ----------------------------
 * **keeptags**  
   Tags should be kept when moving clients between displays
@@ -65,8 +65,8 @@ Other modifications
   * changed to toggleview
 
 * **borderfix**  
-  * single screen: borders hidden if there's only one client or monoclemode.
-  * multi-screen: borders only hidden in monoclemode.
+  * single screen: borders hidden on single clients and in monocle.
+  * multi-screen: borders shown 
 
 * **layoutfirst**  
   layout icon is shown first in menu and has its own colorsettings
