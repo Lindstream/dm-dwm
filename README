@@ -2,7 +2,9 @@ Dream Machine - DWM
 ==============================
 dwm is an extremely fast, small, and dynamic window manager for X. 
 
-Based of DWM head from 2015-03-13 (commit 14343e69cc5), tweaked and configured to my personal preference.
+Based of DWM head from 2015-03-13 (commit 14343e69cc5), tweaked and configured to personal preference.
+
+This is part of Lindstreams Dream Machine, read more @ link.
 
 Patches
 ----------------------------
