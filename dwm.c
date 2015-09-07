@@ -1128,6 +1128,7 @@ manage(Window w, XWindowAttributes *wa) {
 	if (c->mon == selmon)
 		unfocus(selmon->sel, False);
 	c->mon->sel = c;
+	c->mon->tagset[c->mon->seltags] |= c->tags; /* raisetags */
 	arrange(c->mon);
 	XMapWindow(dpy, c->win);
 	focus(NULL);
@@ -1486,6 +1487,7 @@ runorraise(const Arg *arg) {
  
     /* Client not found: spawn it */
     spawn(arg);
+
 }
 
 void
@@ -1516,7 +1518,6 @@ scan(void) {
 
 void
 sendmon(Client *c, Monitor *m) {
-	unsigned int newtagset;
 	if(c->mon == m)
 		return;
 	unfocus(c, True);
