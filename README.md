@@ -30,7 +30,7 @@ Patches
   Nowamore nicknamed htile
 
 * **center**  
-  Adds an iscentered rule to automatically center clients on the current monitor.
+  Adds an "iscentered" rule to automatically center clients on the current monitor.
 
 * **statuscolors**  
   Adds a few more colors to dwm's palette.
@@ -65,7 +65,8 @@ Other modifications
   * changed to toggleview
 
 * **borderfix**  
-  border was applied to all windows when reattaching floating windows. 
+  * single screen: borders hidden if there's only one client or monoclemode.
+  * multi-screen: borders only hidden in monoclemode.
 
 * **layoutfirst**  
   layout icon is shown first in menu and has its own colorsettings
