@@ -1,3 +1,9 @@
+Introduced by Lindstream: runorraise toggles current monitor tag instead of jumping to correct monitor. (replicate: tag application to disp1, run app, go to disp0, runorraise app)
+
+Introduced by Lindstream: gaps are present on last display in multi-monitor mode.. only checking mon->next... need to fix...
+
+Introduced by Lindstream: Runorraise only toggles tag on current monitor instead of target.
+
 ---
 
 18:17 < Biolunar> when i change my resolution in dwm (to a smaller one) and then back to the native, the top bar is not repainted. that's since 5.7.2, in 5.6 it worked fine
