@@ -1,8 +1,10 @@
-Introduced by Lindstream: runorraise toggles current monitor tag instead of jumping to correct monitor. (replicate: tag application to disp1, run app, go to disp0, runorraise app)
+Fixed: Introduced by Lindstream: runorraise toggles current monitor tag instead of jumping to correct monitor. (replicate: tag application to disp1, run app, go to disp0, runorraise app)
 
-Introduced by Lindstream: gaps are present on last display in multi-monitor mode.. only checking mon->next... need to fix...
+Misstaken: Introduced by Lindstream: gaps are present on last display in multi-monitor mode.. 
 
-Introduced by Lindstream: Runorraise only toggles tag on current monitor instead of target.
+Duplicate: Introduced by Lindstream: Runorraise only toggles tag on current monitor instead of target.
+
+Fixed: Introduced by Lindstream: No rearrangement after moving client to other monitor (tagmon/sendmon).
 
 ---
 

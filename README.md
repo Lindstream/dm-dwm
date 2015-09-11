@@ -8,76 +8,79 @@ This is part of Lindstreams Dream Machine, read more @ link.
 
 Patches
 ----------------------------
-* **dwmfifo**    
+* **Dwmfifo**    
   Best thing since sliced bread, this patch adds a FIFO command/controller (/tmp/dwm.fifo) to exec keybind actions through CLI.
 
-* **hide vacant tags**  
+* **Hide vacant tags**  
   Pretty self-explanatory :)
 
-* **statusallmons**  
+* **Statusallmons**  
   Makes the statusbar available on all displays.
 
-* **runorraise**  
+* **Runorraise**  
   Allows you to map frequently used apps to a key combo that will launch the application if it's not already running - otherwise bring the running session into focus. Great stuff to use with browsers and notes.
 
-* **notitle**  
+* **Notitle**  
   Who need titles anyway?
 
-* **save_floats**  
+* **Save_floats**  
   Makes dwm remember the floating position and window size before things are tiled, and restores them appropriately.
 
-* **bottom stack**  
+* **Bottom stack**  
   Nowamore nicknamed htile
 
-* **center**  
+* **Center**  
   Adds an "iscentered" rule to automatically center clients on the current monitor.
 
-* **statuscolors**  
+* **Statuscolors**  
   Adds a few more colors to dwm's palette.
 
-* **focusmaster**  
+* **Focusmaster**  
   Super + ShiftR takes you back to your master client.
 
-* **uselessgaps**  
+* **Uselessgaps**  
   Adds the possibility to gap windows, also takes care of border in monocle and fullscreen mode.
 
-* **viewontag**  
+* **Viewontag**  
   Follow a window to the tag it's being moved to, can't really decide on this one - option is set in config.h (needs fixing, indifferent to current tag status).
 
-* **emptyview**  
+* **Emptyview**  
   There's something annoying about not being able to toggle that last tag out of view.. 
 
-* **swap focus (WIP)**  
+* **Swap focus (WIP)**  
   Allows you to switch focus with a single shortcut
 
 
 Other tweaks
 ----------------------------
-* **keeptags**  
+* **Keeptags**  
   Tags should be kept when moving clients between displays
 
-* **raisetags**  
-  * toggle view if not active when moving clients between display
-  * toggle view if client isn't visible after launch
+* **Followfocus**  
+  You allways travel with the selected client when sending them between your monitors.
 
-* **runorraise**  
-  * checks by window title aswell as names
-  * changed to toggleview
+* **Raisetags**  
+  * Toggle view if not active when moving clients between display
+  * Toggle view if client isn't visible after launch
 
-* **borders & gaps**  
-  * single screen: borders & gaps hidden on single clients and in monocle mode.
-  * multi-screen: borders shown allways, gaps hidden in monocle and on single clients. 
+* **Runorraise**  
+  * Checks by window title aswell as names
+  * If application is available on the current monitor then it's raised. If not, it will instead raise all matches on all the other monitors.
 
-* **layoutfirst**  
-  layout icon is shown first in menu and has its own colorsettings
+* **Borders & gaps**  
+  * Single screen: borders & gaps hidden on single client and in monocle mode.
+  * Multi-screen: borders always shown, gaps hidden in monocle and on single client. 
 
-* **notoccupied**  
-  special color when tags are active but unoccupied (removed rect-indicator)
+* **Layoutfirst**  
+  Layout icon is shown first in menu and has its own colorsettings
 
-* **setting for monoclecounter**
+* **Notoccupied**  
+  Special color when tags are active but unoccupied (removed rect-indicator)
+
+* **Setting for monoclecounter**
 
 
-Dirty shines
+Dirty polish
 ----------------------------
 * **separators between tags**  
   Hardcoded colors in drw > drw_sep()

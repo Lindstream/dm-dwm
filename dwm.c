@@ -785,7 +785,7 @@ drawbar(Monitor *m) {
 		drw_setscheme(drw, &scheme[0]);
 		drw_text(drw, x, 0, w, bh, NULL, 0);
 	}
-	drw_topsep(drw, 0, 0, m->ww, 1);
+	drw_topsep(drw, 0, 1, m->ww, 1);
 	drw_map(drw, m->barwin, 0, 0, m->ww, bh);
 }
 
@@ -1470,26 +1470,42 @@ run(void) {
 void                                                                                                                          
 runorraise(const Arg *arg) {
     char *app = ((char **)arg->v)[4];
-    Arg a = { .ui = ~0 };
+    Bool raised = False;
     Monitor *mon;
     Client *c;
 
     XClassHint hint = { NULL, NULL };
 
-    /* Tries to find the client */
+    /* Check if client is running on the selected monitor */
+    /* Yeah - I'm just going to be dirt laaaazy.. */
+    for (c = selmon->clients; c; c = c->next) {
+        XGetClassHint(dpy, c->win, &hint);
+        if ( ( hint.res_class && strcmp(app, hint.res_class) == 0 ) || 
+        	 (c->name && strcmp(app, c->name) == 0 ) ) { /* check for client-name */
+			c->mon->tagset[c->mon->seltags] |= c->tags; /* raisetags */
+			arrange(c->mon);
+            focus(c);
+            XRaiseWindow(dpy, c->win);
+            return;
+        }
+    }
+    /* Otherwise lift everything else */
     for (mon = mons; mon; mon = mon->next) {
         for (c = mon->clients; c; c = c->next) {
             XGetClassHint(dpy, c->win, &hint);
             if ( ( hint.res_class && strcmp(app, hint.res_class) == 0 ) || 
-            	 (c->name && strcmp(app, c->name) == 0 ) ) { //also check for client-name 
-                a.ui = c->tags;
-                toggleview(&a);
+            	 (c->name && strcmp(app, c->name) == 0 ) ) { /* check for client-name */
+    			c->mon->tagset[c->mon->seltags] |= c->tags; /* raisetags */
+    			arrange(c->mon);
                 focus(c);
                 XRaiseWindow(dpy, c->win);
-                return;
+                raised = True;
             }
         }
     }
+
+    if(raised)
+    	return;
  
     /* Client not found: spawn it */
     spawn(arg);
@@ -1534,8 +1550,9 @@ sendmon(Client *c, Monitor *m) {
 	c->mon->tagset[c->mon->seltags] |= c->tags; /* raisetags */
 	attach(c);
 	attachstack(c);
-	focus(c);
-	arrange(selmon);
+	arrange(selmon); /* Followfocus, rearr old mon */
+	focus(c); /* Followfocus, follow client */
+	arrange(selmon); /* Followfocus, rearr new mon */
 }
 
 void
