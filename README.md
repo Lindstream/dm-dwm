@@ -43,9 +43,6 @@ Patches
 * **Uselessgaps**  
   Adds the possibility to gap windows, also takes care of border in monocle and fullscreen mode.
 
-* **Viewontag**  
-  Follow a window to the tag it's being moved to, can't really decide on this one - option is set in config.h (needs fixing, indifferent to current tag status).
-
 * **Emptyview**  
   There's something annoying about not being able to toggle that last tag out of view.. 
 
