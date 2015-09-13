@@ -23,7 +23,7 @@ Patches
 * **Runorraise**  
   Allows you to map frequently used apps to a key combo that will launch the application if it's not already running - otherwise bring the running session into focus. Great stuff to use with browsers and notes.  
   * Now checks for window title aswell as names
-  * If application is running on the current monitor then bring it up. If not: scan and toggle all matches on all monitors before executing command.
+  * If application is running on the current monitor then bring it up. If not: scan and toggle all matches on all monitors. If no matches are found: exec! 
 
 * **Save_floats**  
   Makes dwm remember the floating position and window size before things are tiled, and restores them appropriately.
@@ -51,12 +51,11 @@ Patches
 
 * **Tagintostack**  
   Allways attach clients to the stack area when toggling tags.
-  - Thoughts: Might be a good thing if this is ignored while in monocle mode, haven't really decided wherever it's annoying or not.
 
-* **Urgent border color** 
+* **Urgent border color**  
   Kinda neat on a multi-monitor setup.
 
-* **Warp**
+* **Warp**  
   Makes the mouse cursor follow your focus.  
   * Added setting mousemove to config.h.
   * Changed warp position to bottom right corner (-25px).
@@ -64,7 +63,7 @@ Patches
 
 Other tweaks
 ----------------------------
-* **Notitle**
+* **Notitle**  
   Who need titles anyway?
 
 * **Keeptags**  
@@ -91,8 +90,8 @@ Other tweaks
 
 Dirty polish
 ----------------------------
-* **separators between tags**  
+* **Separators between tags**  
   Hardcoded colors in drw > drw_sep()
 
-* **top line**  
+* **Top line**  
   Hardcoded colors in drw > drw_topsep()
