@@ -6,6 +6,9 @@ Based of DWM 6.1 head from 2015-03-13 (commit 14343e69cc5), tweaked and configur
 
 This is part of Lindstreams Dream Machine, read more @ link.
 
+Everything listed is implemented and working. 
+BUGS are listed in BUGS ;)
+
 Patches
 ----------------------------
 * **Dwmfifo**    
@@ -18,10 +21,9 @@ Patches
   Makes the statusbar available on all displays.
 
 * **Runorraise**  
-  Allows you to map frequently used apps to a key combo that will launch the application if it's not already running - otherwise bring the running session into focus. Great stuff to use with browsers and notes.
-
-* **Notitle**  
-  Who need titles anyway?
+  Allows you to map frequently used apps to a key combo that will launch the application if it's not already running - otherwise bring the running session into focus. Great stuff to use with browsers and notes.  
+  * Now checks for window title aswell as names
+  * If application is running on the current monitor then bring it up. If not: scan and toggle all matches on all monitors before executing command.
 
 * **Save_floats**  
   Makes dwm remember the floating position and window size before things are tiled, and restores them appropriately.
@@ -32,8 +34,8 @@ Patches
 * **Center**  
   Adds an "iscentered" rule to automatically center clients on the current monitor.
 
-* **Statuscolors**  
-  Adds a few more colors to dwm's palette.
+* **Statuscolors** 
+  Adds a few more colors to dwm's palette. 
 
 * **Focusmaster**  
   Super + ShiftR takes you back to your master client.
@@ -57,22 +59,26 @@ Patches
 * **Urgent border color** 
   Kinda neat on a multi-monitor setup.
 
+* **Warp**
+  Makes the mouse cursor follow your focus.  
+  * Added setting mousemove to config.h.
+  * Changed warp position to bottom right corner (-25px).
+
 
 Other tweaks
 ----------------------------
+* **Notitle**
+  Who need titles anyway?
+
 * **Keeptags**  
-  Tags should be kept when moving clients between displays
+  Tags should be kept when moving clients between displays.
 
 * **Followfocus**  
   You allways travel with the selected client when sending them between your monitors.
 
 * **Raisetags**  
-  * Toggle view if not active when moving clients between display
-  * Toggle view if client isn't visible after launch
-
-* **Runorraise**  
-  * Checks by window title aswell as names
-  * If application is available on the current monitor then it's raised. If not, it will instead raise all matches on all the other monitors.
+  * Activate view if not active when moving clients between display
+  * Activate view if client isn't visible after launch
 
 * **Borders & gaps**  
   * Single screen: borders & gaps hidden on single client and in monocle mode.
