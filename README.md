@@ -52,6 +52,10 @@ Patches
 
 * **Tagintostack**  
   Allways attach clients to the stack area when toggling tags.
+  - Thoughts: Might be a good thing if this is ignored while in monocle mode, haven't really decided wherever it's annoying or not.
+
+* **Urgent border color** 
+  Kinda neat on a multi-monitor setup.
 
 
 Other tweaks
@@ -81,7 +85,6 @@ Other tweaks
   Special color when tags are active but unoccupied (removed rect-indicator)
 
 * **Setting for monoclecounter**
-
 
 Dirty polish
 ----------------------------
