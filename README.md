@@ -50,6 +50,9 @@ Patches
 * **Push up/down**  
   Allows you to move clients around the stack.
 
+* **Tagintostack**  
+  Allways attach clients to the stack area when toggling tags.
+
 
 Other tweaks
 ----------------------------
