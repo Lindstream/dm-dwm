@@ -47,8 +47,8 @@ Patches
 * **Emptyview**  
   There's something annoying about not being able to toggle that last tag out of view.. 
 
-* **Swap focus (WIP)**  
-  Allows you to switch focus with a single shortcut
+* **Push up/down**  
+  Allows you to move clients around the stack.
 
 
 Other tweaks
