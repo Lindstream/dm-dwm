@@ -8,7 +8,7 @@ Fixed: No rearrangement after moving client to other monitor (tagmon/sendmon).
 
 Low: Clean up runorraise (you dirty pig...)
 
-Medium: Warp doesn't warp on focusmon
+Fixed: Warp doesn't warp on focusmon
 
 ################################
 ################################
