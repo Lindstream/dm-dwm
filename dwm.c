@@ -1188,8 +1188,6 @@ motionnotify(XEvent *e) {
 		unfocus(selmon->sel, True);
 		selmon = m;
 		focus(NULL);
-		if (warpmouse)
-			warp(selmon->sel);
 	}
 	mon = m;
 }

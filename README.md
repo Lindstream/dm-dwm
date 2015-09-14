@@ -57,8 +57,9 @@ Patches
 
 * **Warp**  
   Makes the mouse cursor follow your focus.  
-  * Added setting mousemove to config.h.
-  * Changed warp position to bottom right corner (-25px).
+  * Added setting mousemove to config.h.  
+  * Changed warp position to bottom right corner (-25px).  
+  * Not triggered by motion anymore, only keys
 
 
 Other tweaks
