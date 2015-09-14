@@ -34,7 +34,7 @@ Patches
 * **Center**  
   Adds an "iscentered" rule to automatically center clients on the current monitor.
 
-* **Statuscolors** 
+* **Statuscolors**  
   Adds a few more colors to dwm's palette. 
 
 * **Focusmaster**  
@@ -85,6 +85,9 @@ Other tweaks
 
 * **Notoccupied**  
   Special color when tags are active but unoccupied (removed rect-indicator)
+
+* **Bucket**  
+  Bucket (tag 1) new clients when no other rules apply (configurable). 
 
 * **Setting for monoclecounter**
 
