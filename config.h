@@ -45,6 +45,7 @@ static const unsigned int gappx           = 1;        /* gap pixel between windo
 static const Bool monoclecount            = False;    /* show no. of clients in monocle layout */
 static const Bool warpmouse               = True;     /* warp mouse pointer to focused client */
 static const Bool bucket                  = True;     /* send new cliens to tag 1 when no other rules apply */
+static const double opacity               = 0.95;     /* opacity for bar, nothing else */
 
 /* tagging */
 static const char *tags[] = {

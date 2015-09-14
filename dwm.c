@@ -65,7 +65,7 @@
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
 enum { NetSupported, NetWMName, NetWMState,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
-       NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
+       NetWMWindowsOpacity, NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
 enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
 enum { ClkTagBar, ClkLtSymbol, ClkStatusText,
        ClkClientWin, ClkRootWin, ClkLast }; /* clicks */
@@ -1751,6 +1751,7 @@ setup(void) {
 	netatom[NetWMWindowType] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", False);
 	netatom[NetWMWindowTypeDialog] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DIALOG", False);
 	netatom[NetClientList] = XInternAtom(dpy, "_NET_CLIENT_LIST", False);
+	netatom[NetWMWindowsOpacity] = XInternAtom(dpy, "_NET_WM_WINDOW_OPACITY", False);
 	/* init cursors */
 	cursor[CurNormal] = drw_cur_create(drw, XC_left_ptr);
 	cursor[CurResize] = drw_cur_create(drw, XC_sizing);
@@ -2012,6 +2013,7 @@ unmapnotify(XEvent *e) {
 
 void
 updatebars(void) {
+	unsigned long real_opacity[] = { opacity * 0xffffffff };
 	Monitor *m;
 	XSetWindowAttributes wa = {
 		.override_redirect = True,
@@ -2024,6 +2026,8 @@ updatebars(void) {
 		m->barwin = XCreateWindow(dpy, root, m->wx, m->by, m->ww, bh, 0, DefaultDepth(dpy, screen),
 		                          CopyFromParent, DefaultVisual(dpy, screen),
 		                          CWOverrideRedirect|CWBackPixmap|CWEventMask, &wa);
+		XChangeProperty(dpy, m->barwin, netatom[NetWMWindowsOpacity], XA_CARDINAL,
+						32, PropModeReplace, (unsigned char *)real_opacity, 1);
 		XDefineCursor(dpy, m->barwin, cursor[CurNormal]->cursor);
 		XMapRaised(dpy, m->barwin);
 	}

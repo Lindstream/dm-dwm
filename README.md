@@ -59,21 +59,21 @@ Patches
   Makes the mouse cursor follow your focus.  
   * Added setting mousemove to config.h.  
   * Changed warp position to bottom right corner (-25px).  
-  * Not triggered by motion anymore, only keys
+  * Not triggered by motion anymore, only keys.
 
 
 Other tweaks
 ----------------------------
-* **Notitle**  
+* **No title**  
   Who need titles anyway?
 
-* **Keeptags**  
+* **Keep tags**  
   Tags should be kept when moving clients between displays.
 
 * **Followfocus**  
   You allways travel with the selected client when sending them between your monitors.
 
-* **Raisetags**  
+* **Raise tags**  
   * Activate view if not active when moving clients between display
   * Activate view if client isn't visible after launch
 
@@ -81,14 +81,16 @@ Other tweaks
   * Single screen: borders & gaps hidden on single client and in monocle mode.
   * Multi-screen: borders always shown, gaps hidden in monocle and on single client. 
 
-* **Layoutfirst**  
+* **Layout first**  
   Layout icon is shown first in menu and has its own colorsettings
 
-* **Notoccupied**  
+* **Not occupied**  
   Special color when tags are active but unoccupied (removed rect-indicator)
 
 * **Bucket**  
   Bucket (tag 1) new clients when no other rules apply (configurable). 
+
+* **Bar opacity**
 
 * **Setting for monoclecounter**
 
