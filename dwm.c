@@ -1954,7 +1954,7 @@ toggleview(const Arg *arg) {
 
 	// we also want to be sure not to mutate the focus
 	focus(selected);
-
+	
 	selmon->tagset[selmon->seltags] = newtagset;
 	focus(NULL);
 	arrange(selmon);

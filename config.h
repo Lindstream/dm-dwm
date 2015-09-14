@@ -103,39 +103,45 @@ static const Layout layouts[] = {
 
 /* dmenu */
 static char dmenumon[2]            = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char dmenu_width[]    = "500";  
+static const char dmenu_width[]    = "500"; 
 static const char dmenu_lheight[]  = "32";  
-static const char dmenu_lines[]    = "10";
+static const char dmenu_lines[]    = "8";
 
 /* commands */
 static const char *cmd_browser[] = { "firefox", NULL, NULL, NULL, "Firefox" };
 static const char *cmd_canto[] = { "termite", "--title", "canto", "-e", "canto-curses", NULL, NULL, NULL,  "canto" };
 static const char *cmd_cherrytree[] = { "cherrytree", NULL, NULL, NULL, "CherryTree" };
+static const char *cmd_clipmenu[] = { "clipmenu", "-m", dmenumon, "-w", dmenu_width, "-lh", dmenu_lheight, "-l", dmenu_lines, "-nb", colors[7][2], "-nf", colors[7][1], "-sb", colors[8][2], "-sf", colors[8][1], "-centerx", "-centery", NULL };
 static const char *cmd_cmus[] = { "termite", "--title", "cmus", "-e", "cmus", NULL, NULL, NULL,  "cmus" };
 static const char *cmd_chrome[] = { "chromium", NULL, NULL, NULL, "Chromium" };
 static const char *cmd_deluge[] = { "deluge-gtk", NULL, NULL, NULL, "Deluge" };
 static const char *cmd_dmenu[] = { "launcher", dmenumon, "dmenu", "-m", dmenumon, "-w", dmenu_width, "-lh", dmenu_lheight, "-l", dmenu_lines, "-nb", colors[7][2], "-nf", colors[7][1], "-sb", colors[8][2], "-sf", colors[8][1], "-centerx", "-centery", NULL };
+static const char *cmd_passmenu[] = { "passmenu", "-m", dmenumon, "-w", dmenu_width, "-lh", dmenu_lheight, "-l", dmenu_lines, "-nb", colors[7][2], "-nf", colors[7][1], "-sb", colors[8][2], "-sf", colors[8][1], "-centerx", "-centery", NULL };
 static const char *cmd_sublime[] = { "subl3", NULL, NULL, NULL, "Subl3" };
 static const char *cmd_term[]  = { "termite", NULL };
 static const char *cmd_weechat[]  = { "termite", "--title", "weechat", "-e", "weechat", NULL, NULL, NULL,  "weechat" };
-static const char *kb_backlightdec[] = { "xbacklight", "-dec", "2", NULL };
-static const char *kb_backlightinc[] = { "xbacklight", "-inc", "10", NULL };
-static const char *kb_launcher1[] = { "xbacklight", "-dec", "10", NULL };
-static const char *kb_launcher2[] = { "togglepad", NULL, NULL };
-static const char *kb_lightoff[] = { "keyboard_actions/fn_kbd_backlight_off", NULL };
-static const char *kb_lighton[] = { "keyboard_actions/fn_kbd_backlight_on", NULL };
+
+/* KB functions */
 static const char *kb_audio_prev[] = { "deadbeef", "--prev", NULL };
 static const char *kb_audio_play[] = { "deadbeef", "--play-pause", NULL };
 static const char *kb_audio_next[] = { "deadbeef", "--next", NULL };
 static const char *kb_audio_mute[] = { "pulseaudio-ctl", "mute", NULL };
 static const char *kb_audio_vold[] = { "pulseaudio-ctl", "down", NULL };
 static const char *kb_audio_volu[] = { "pulseaudio-ctl", "up", NULL };
+static const char *kb_backlightdec[] = { "xbacklight", "-dec", "2", NULL };
+static const char *kb_backlightinc[] = { "xbacklight", "-inc", "10", NULL };
+static const char *kb_launcher1[] = { "xbacklight", "-dec", "10", NULL };
+static const char *kb_launcher2[] = { "togglepad", NULL, NULL };
+static const char *kb_lightoff[] = { "keyboard_actions/fn_kbd_backlight_off", NULL };
+static const char *kb_lighton[] = { "keyboard_actions/fn_kbd_backlight_on", NULL };
+
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	
 	/* Commands */
-	{ MODKEY,                       XK_space,   spawn,          {.v = cmd_dmenu } },
+  { MODKEY,                       XK_space,   spawn,          {.v = cmd_dmenu } },
+	{ MODKEY,                       XK_v,       spawn,          {.v = cmd_clipmenu } },
 	{ MODKEY|ShiftMask,             XK_Return, 	spawn,          {.v = cmd_term } },
 	{ MODKEY,			                  XK_x, 	   	runorraise,     {.v = cmd_browser } },
 	
@@ -227,10 +233,12 @@ static Command commands[] = {
    { "cmd_browser",     runorraise,     {.v = cmd_browser} },
    { "cmd_canto",       runorraise,     {.v = cmd_canto} },
    { "cmd_cherrytree",  runorraise,     {.v = cmd_cherrytree} },
+   { "cmd_clipmenu",    spawn,          {.v = cmd_clipmenu} },
    { "cmd_cmus",        runorraise,     {.v = cmd_cmus} },
    { "cmd_chrome",      runorraise,     {.v = cmd_chrome} },
    { "cmd_deluge",      runorraise,     {.v = cmd_deluge} },
-   { "cmd_dmenu",       spawn,          {.v = cmd_term} },
+   { "cmd_dmenu",       spawn,          {.v = cmd_dmenu} },
+   { "cmd_passmenu",    spawn,          {.v = cmd_passmenu} },
    { "cmd_sublime",     runorraise,     {.v = cmd_sublime} },
    { "cmd_term",        spawn,          {.v = cmd_term} },
    { "cmd_weechat",     runorraise,     {.v = cmd_weechat} },
