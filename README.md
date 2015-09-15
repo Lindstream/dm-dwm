@@ -74,7 +74,7 @@ Other tweaks
   You allways travel with the selected client when sending them between your monitors.
 
 * **Raise tags**  
-  * Activate view if not active when moving clients between display
+  * Activate view if not active when moving clients between displays
   * Activate view if client isn't visible after launch
 
 * **Borders & gaps**  

@@ -25,8 +25,8 @@ static const char colors[NUMCOLORS][MAXCOLORS][8] = {
    { "#282828", "#887e75", "#181818" },  // 0 = base
    { "#dc9656", "#d6b89c", "#0f0f0f" },  // 1 = active
    { "#dc9656", "#dc9656", "#0f0f0f" },  // 2 = selected
-   { "#ff0000", "#d6d47a", "#181818" },  // 3 = urgent
-   { "#ff0000", "#cc5157", "#181818" },  // 4 = error
+   { "#d6d47a", "#d6d47a", "#181818" },  // 3 = urgent
+   { "#cc5157", "#cc5157", "#181818" },  // 4 = error
    { "#ff0000", "#887e75", "#181818" },  // 5 = layout
    { "#ff0000", "#444444", "#181818" },  // 6 = inactive
    { "#ff9900", "#887e75", "#282828" },  // 7 = dmenu - normal
@@ -67,7 +67,6 @@ static const Rule rules[] = {
    */
   /* class               instance    title              tags mask     iscentered  isfloating   monitor */
   { "CherryTree",        NULL,       NULL,              1 << 3,       False,      False,        1 },
-  { "Deadbeef",          NULL,       NULL,              1 << 4,       False,      False,        1 },
   { "Deluge",            NULL,       NULL,              1 << 7,       False,      False,        1 },
   { "Firefox",           NULL,       NULL,              1 << 1,       False,      False,        1 },
   { "Chromium",          NULL,       NULL,              1 << 1,       False,      False,        1 },
@@ -124,18 +123,18 @@ static const char *cmd_term[]  = { "termite", NULL };
 static const char *cmd_weechat[]  = { "termite", "--title", "weechat", "-e", "weechat", NULL, NULL, NULL,  "weechat" };
 
 /* KB functions */
-static const char *kb_audio_prev[] = { "deadbeef", "--prev", NULL };
-static const char *kb_audio_play[] = { "deadbeef", "--play-pause", NULL };
-static const char *kb_audio_next[] = { "deadbeef", "--next", NULL };
+static const char *kb_audio_prev[] = { "cmus-remote", "-r", NULL };
+static const char *kb_audio_play[] = { "cmus-remote", "-u", NULL };
+static const char *kb_audio_next[] = { "cmus-remote", "-n", NULL };
 static const char *kb_audio_mute[] = { "pulseaudio-ctl", "mute", NULL };
 static const char *kb_audio_vold[] = { "pulseaudio-ctl", "down", NULL };
 static const char *kb_audio_volu[] = { "pulseaudio-ctl", "up", NULL };
-static const char *kb_backlightdec[] = { "xbacklight", "-dec", "2", NULL };
-static const char *kb_backlightinc[] = { "xbacklight", "-inc", "10", NULL };
-static const char *kb_launcher1[] = { "xbacklight", "-dec", "10", NULL };
+static const char *kb_backlightdec[] = { "backlight", "-d", "96", NULL };
+static const char *kb_backlightinc[] = { "backlight", "-i", "192", NULL };
+static const char *kb_launcher1[] = { "togglepad", NULL, NULL };
 static const char *kb_launcher2[] = { "togglepad", NULL, NULL };
-static const char *kb_lightoff[] = { "keyboard_actions/fn_kbd_backlight_off", NULL };
-static const char *kb_lighton[] = { "keyboard_actions/fn_kbd_backlight_on", NULL };
+static const char *kb_lightoff[] = { "keylight",  "-i", "24", NULL };
+static const char *kb_lighton[] = { "keylight", "-i", "24", NULL };
 
 
 static Key keys[] = {
