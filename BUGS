@@ -2,13 +2,21 @@
 # Introduced by Lindstream     #
 ################################
 
-Fixed: runorraise toggles current monitor tag instead of jumping to correct monitor. (replicate: tag application to disp1, run app, go to disp0, runorraise app)
+Fixed: runorraise toggles current monitor tag instead of jumping to correct monitor. (replicate: tag application to mon1, run app, go to mon0, runorraise app)
 
 Fixed: No rearrangement after moving client to other monitor (tagmon/sendmon).
 
 Low: Clean up runorraise (you dirty pig...)
 
 Fixed: Warp doesn't warp on focusmon
+
+Low: Pointer warps while moving floating clients between monitors.
+
+Low: Pointer doesn't warp on runorraise
+
+Fixed: Pointer warps to all popups (_NET_WM_WINDOW_TYPE_DIALOG).. makes me cry.
+
+Low: Gaps present on single clients after restart.
 
 ################################
 ################################
