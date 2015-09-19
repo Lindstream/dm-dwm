@@ -1569,16 +1569,14 @@ runorraise(const Arg *arg) {
                 focus(c);
                 XRaiseWindow(dpy, c->win);
                 raised = True;
+                if (warpmouse)
+					warp(c);   
             }
         }
     }
 
-    if(raised) {
-    	if (warpmouse) {
-			warp(mons->sel);   
-    	}
+    if(raised)
     	return;
- 	}
 
     /* Client not found: spawn it */
     spawn(arg);
