@@ -1575,7 +1575,7 @@ runorraise(const Arg *arg) {
 
     if(raised) {
     	if (warpmouse) {
-			warp(mon->sel);   
+			warp(mons->sel);   
     	}
     	return;
  	}
