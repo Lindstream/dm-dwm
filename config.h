@@ -50,14 +50,14 @@ static const double opacity               = 0.95;     /* opacity for bar, nothin
 /* tagging */
 static const char *tags[] = {
     "1 \uE60D  ", /* 01 - bucket */
-    "2 \uE68B  ", /* 02 - web */
+    "2 \uE707  ", /* 02 - terminal */
     "3 \uE685  ", /* 03 - dev */
-    "4 \uE67D  ", /* 04 - text */
-    "5 \uE61C  ", /* 05 - music */
-    "6 \uE6CD  ", /* 06 - media */ 
-    "7 \uE6CB  ", /* 07 - files & transfers */
-    "8 \uE71D  ", /* 08 - chats */
-    "9 \uE6CC  ", /* 09 - news & mail */
+    "4 \uE68B  ", /* 04 - web */
+    "5 \uE6CD  ", /* 05 - media */
+    "6 \uE6E9  ", /* 06 - notes */ 
+    "7 \uE6C2  ", /* 07 - files & transfers */
+    "8 \uE71D  ", /* 08 - chat & mail */
+    "9 \uE68C  ", /* 09 - news & updates */
 };
 
 static const Rule rules[] = {
@@ -66,16 +66,15 @@ static const Rule rules[] = {
    *  WM_NAME(STRING) = title
    */
   /* class               instance    title              tags mask     iscentered  isfloating   monitor */
-  { "CherryTree",        NULL,       NULL,              1 << 3,       False,      False,        1 },
+  { "Cherrytree",        NULL,       NULL,              1 << 5,       False,      False,        1 },
   { "Deluge",            NULL,       NULL,              1 << 7,       False,      False,        1 },
-  { "Firefox",           NULL,       NULL,              1 << 1,       False,      False,        1 },
-  { "Chromium",          NULL,       NULL,              1 << 1,       False,      False,        1 },
-  { "Termite",           NULL,       "weechat",         1 << 7,       False,      False,        2 },
-  {  NULL,               NULL,       "cmus",            1 << 4,       False,      False,        2 },
-  {  NULL,               NULL,       "canto",           1 << 8,       False,      False,        2 },
-  {  NULL,               NULL,       "glances",         1 << 4,       False,      False,        1 },
+  { "Firefox",           NULL,       NULL,              1 << 3,       False,      False,        1 },
+  { "Termite",           NULL,       NULL,              1 << 1,       False,      False,        -1 },
   { "Subl3",             NULL,       NULL,              1 << 2,       False,      False,        1 },
   { "GIMP",              NULL,       NULL,              1 << 4,       False,      False,        0 },
+  {  NULL,               NULL,       "weechat",         1 << 7,       False,      False,        2 },
+  {  NULL,               NULL,       "cmus",            1 << 4,       False,      False,        2 },
+  {  NULL,               NULL,       "canto",           1 << 8,       False,      False,        2 },
 };
 
 /* layout(s) */
