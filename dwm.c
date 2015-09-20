@@ -898,7 +898,7 @@ focusmon(const Arg *arg) {
 					in gedit and anjuta */
 	selmon = m;
 	focus(NULL);
-	if (warpmouse)
+	if (warpmouse && selmon->sel)
 		warp(selmon->sel);
 }
 

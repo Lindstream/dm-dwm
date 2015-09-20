@@ -12,13 +12,13 @@ Fixed (dirrrty): Pointer doesn't warp on runorraise
 
 Fixed: Pointer warps to all popups (_NET_WM_WINDOW_TYPE_DIALOG).. makes me cry.
 
+Fixed: DWM crashes on focusmon+/- if there are no clients.
+
 Low: Pointer warps while moving floating clients between monitors.
 
 Low: Gaps present on single clients after restart.
 
 Low: Clean up runorraise (you dirty pig...)
-
-High: DWM crashes on focusmon+/- if there are no clients.
 
 ################################
 ################################
