@@ -18,6 +18,8 @@ Low: Gaps present on single clients after restart.
 
 Low: Clean up runorraise (you dirty pig...)
 
+High: DWM crashes on focusmon+/- if there are no clients.
+
 ################################
 ################################
 ---
