@@ -319,6 +319,11 @@ applyrules(Client *c) {
 			c->iscentered = r->iscentered;
 			c->isfloating = r->isfloating;
 			c->tags |= r->tags;
+
+			/* Ordered rules */
+			if (r->title)
+				c->tags = r->tags;
+
 			for(m = mons; m && m->num != r->monitor; m = m->next);
 			if(m)
 				c->mon = m;

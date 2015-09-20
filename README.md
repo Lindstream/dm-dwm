@@ -64,8 +64,6 @@ Patches
 * **Attach aside** (testing, not sure)  
   New clients are attached and focused in stack area. This is the "original version" (6.0), as "Rasise tags tweak" takes care of activates inactive tags. 
 
-
-
 Other tweaks
 ----------------------------
 * **No title**  
@@ -93,6 +91,9 @@ Other tweaks
 
 * **Bucket**  
   Bucket (tag 1) new clients when no other rules apply (configurable). 
+
+* **Ordered rules**  
+  Matching Class appends tag to clients, Matching Titles assigns that single tag.  
 
 * **Bar opacity**
 
