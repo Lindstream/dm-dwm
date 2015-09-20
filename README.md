@@ -61,6 +61,10 @@ Patches
   * Changed warp position to bottom right corner (-25px).  
   * Not triggered by motion anymore, only keys.
 
+* **Attach aside** (testing, not sure)  
+  New clients are attached and focused in stack area. This is the "original version" (6.0), as "Rasise tags tweak" takes care of activates inactive tags. 
+
+
 
 Other tweaks
 ----------------------------
