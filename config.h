@@ -26,7 +26,7 @@ static const char colors[NUMCOLORS][MAXCOLORS][8] = {
    { "#282828",  "#887e75",  "#181818" },  /* 0 = base */
    { "#dc9656",  "#d6b89c",  "#0f0f0f" },  /* 1 = active */
    { "#dc9656",  "#dc9656",  "#0f0f0f" },  /* 2 = selected */
-   { "#d6d47a",  "#d6d47a",  "#181818" },  /* 3 = urgent */
+   { "#7ab4d6",  "#7ab4d6",  "#181818" },  /* 3 = urgent */
    { "#cc5157",  "#cc5157",  "#181818" },  /* 4 = error */
    { "#ff0000",  "#887e75",  "#181818" },  /* 5 = layout */
    { "#ff0000",  "#444444",  "#181818" },  /* 6 = inactive */
@@ -39,13 +39,13 @@ static const unsigned int tagpadding      = 0;        /* adds padding to tags */
 static const unsigned int ltmargin        = 12;       /* adds right margin to lticon */
 static const unsigned int borderpx        = 3;        /* border pixel of windows */
 static const unsigned int snap            = 32;       /* snap pixel */
+static const unsigned int gappx           = 2;        /* gap pixel between windows */
 static const Bool showbar                 = True;     /* False means no bar */
 static const Bool topbar                  = False;    /* False means bottom bar */
-static const unsigned int gappx           = 2;        /* gap pixel between windows */
 static const Bool monoclecount            = False;    /* show no. of clients in monocle layout */
 static const Bool warpmouse               = True;     /* warp mouse pointer to focused client */
 static const Bool bucket                  = True;     /* send new cliens to tag 1 when no other rules apply */
-static const double opacity               = 0.95;     /* opacity for bar, nothing else */
+static const double opacity               = 0.8;      /* opacity for bar, nothing else */
 
 /* tagging */
 static const char *tags[] = {

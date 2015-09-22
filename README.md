@@ -9,6 +9,15 @@ This is part of Lindstreams Dream Machine, read more @ link.
 Everything listed is implemented and working. 
 BUGS are listed in BUGS ;)
 
+Screenshots
+----
+**Clean**
+![dream-machine-theme](https://raw.githubusercontent.com/Lindstream/dm-dwm/master/screenshot.jpg)
+
+
+**Dirty**
+![dream-machine-theme](https://raw.githubusercontent.com/Lindstream/dm-dwm/master/screenshot2.jpg)
+
 Patches
 ----------------------------
 * **Dwmfifo**    
