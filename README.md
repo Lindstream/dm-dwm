@@ -12,7 +12,7 @@ BUGS are listed in BUGS ;)
 Screenshots
 ----
 **Clean**
-![dream-machine-theme](https://raw.githubusercontent.com/Lindstream/dm-dwm/master/screenshot.jpg)
+![dream-machine-theme](https://raw.githubusercontent.com/Lindstream/dm-dwm/master/screenshot1.jpg)
 
 
 **Dirty**
