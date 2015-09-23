@@ -16,11 +16,11 @@
 
 /* appearance */
 static const char *fonts[] = {
-    "AnonMix:size=11",
+    "AnonMix-11",
     "Andale Mono-9:style=bold",
 };
-#define NUMCOLORS 9
 
+#define NUMCOLORS 9
 static const char colors[NUMCOLORS][MAXCOLORS][8] = {
    /* border     foreground  background */
    { "#282828",  "#887e75",  "#181818" },  /* 0 = base */
@@ -45,7 +45,7 @@ static const Bool topbar                  = False;    /* False means bottom bar 
 static const Bool monoclecount            = False;    /* show no. of clients in monocle layout */
 static const Bool warpmouse               = True;     /* warp mouse pointer to focused client */
 static const Bool bucket                  = True;     /* send new cliens to tag 1 when no other rules apply */
-static const double opacity               = 0.8;      /* opacity for bar, nothing else */
+static const double opacity               = 0.8;      /* opacity for bar, nothing else, use Compton for that */
 
 /* tagging */
 static const char *tags[] = {
@@ -69,7 +69,7 @@ static const Rule rules[] = {
   { "Cherrytree",        NULL,       NULL,              1 << 5,       False,      False,        1 },
   { "Deluge",            NULL,       NULL,              1 << 7,       False,      False,        1 },
   { "Firefox",           NULL,       NULL,              1 << 3,       False,      False,        1 },
-  { "Termite",           NULL,       NULL,              1 << 1,       False,      False,        -1 },
+  { "Termite",           NULL,       NULL,              1 << 1,       False,      False,        -1},
   { "Subl3",             NULL,       NULL,              1 << 2,       False,      False,        1 },
   { "GIMP",              NULL,       NULL,              1 << 4,       False,      False,        0 },
   {  NULL,               NULL,       "weechat",         1 << 7,       False,      False,        2 },
@@ -89,14 +89,6 @@ static const Layout layouts[] = {
   { "\uE6FF",  NULL },    /* float */
   { "\uE700",  htile },   /* bottom stack */
 };
-
-/* key definitions */
-#define MODKEY Mod4Mask
-#define TAGKEYS(KEY,TAG) \
-  { MODKEY|ControlMask,           KEY,      view,           {.ui = 1 << TAG} }, \
-  { MODKEY,                       KEY,      toggleview,     {.ui = 1 << TAG} }, \
-  { MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-  { MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
@@ -134,6 +126,14 @@ static const char *kb_launcher1[] = { "togglepad", NULL, NULL };
 static const char *kb_launcher2[] = { "togglepad", NULL, NULL };
 static const char *kb_lightdec[] = { "keylight",  "-d", "24", NULL };
 static const char *kb_lightinc[] = { "keylight", "-i", "24", NULL };
+
+/* key definitions */
+#define MODKEY Mod4Mask
+#define TAGKEYS(KEY,TAG) \
+  { MODKEY|ControlMask,           KEY,  view,           {.ui = 1 << TAG} }, \
+  { MODKEY,                       KEY,  toggleview,     {.ui = 1 << TAG} }, \
+  { MODKEY|ShiftMask,             KEY,  tag,            {.ui = 1 << TAG} }, \
+  { MODKEY|ControlMask|ShiftMask, KEY,  toggletag,      {.ui = 1 << TAG} },
 
 static Key keys[] = {
   /* modifier               key        function        argument */
@@ -209,7 +209,6 @@ static Key keys[] = {
   TAGKEYS(                  XK_8,       7)
   TAGKEYS(                  XK_9,       8)
 };
-
 
 /* button definitions */
 /* click can be ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */

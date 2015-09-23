@@ -70,7 +70,7 @@ Patches
   * Changed warp position to bottom right corner (-25px).  
   * Not triggered by motion anymore, only keys.
 
-* **Attach aside** 
+* **Attach aside**  
   New clients are attached and focused in stack area. 
 
 Other tweaks
