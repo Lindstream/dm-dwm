@@ -54,10 +54,10 @@ static const char *tags[] = {
     "3 \uE685  ", /* 03 - dev */
     "4 \uE68B  ", /* 04 - web */
     "5 \uE6CD  ", /* 05 - media */
-    "6 \uE6E9  ", /* 06 - notes */ 
+    "6 \uE6B5  ", /* 06 - notes & drawing */ 
     "7 \uE6C2  ", /* 07 - files & transfers */
-    "8 \uE71D  ", /* 08 - chat & mail */
-    "9 \uE68C  ", /* 09 - news & updates */
+    "8 \uE71D  ", /* 08 - chat, news & mail */
+    "9 \uE680  ", /* 09 - archive, sleeping */
 };
 
 static const Rule rules[] = {
@@ -67,11 +67,16 @@ static const Rule rules[] = {
    */
   /* class               instance    title              tags mask     iscentered  isfloating   monitor */
   { "Cherrytree",        NULL,       NULL,              1 << 5,       False,      False,        1 },
-  { "Deluge",            NULL,       NULL,              1 << 7,       False,      False,        1 },
+  { "chromium",          NULL,       NULL,              1 << 3,       False,      False,        1 },
+  { "Deluge",            NULL,       NULL,              1 << 8,       False,      False,        1 },
   { "Firefox",           NULL,       NULL,              1 << 3,       False,      False,        1 },
   { "Termite",           NULL,       NULL,              1 << 1,       False,      False,        -1},
+  { "Thunar",            NULL,       NULL,              1 << 6,       False,      False,        -1},
   { "Subl3",             NULL,       NULL,              1 << 2,       False,      False,        1 },
   { "GIMP",              NULL,       NULL,              1 << 4,       False,      False,        0 },
+  { "Eclipse",           NULL,       NULL,              1 << 2,       False,      False,        -1 },
+  { "Vlc",               NULL,       NULL,              1 << 4,       False,      False,        -1 },
+  { "bomi",              NULL,       NULL,              1 << 4,       False,      False,        -1 },
   {  NULL,               NULL,       "weechat",         1 << 7,       False,      False,        2 },
   {  NULL,               NULL,       "cmus",            1 << 4,       False,      False,        2 },
   {  NULL,               NULL,       "canto",           1 << 8,       False,      False,        2 },
@@ -102,15 +107,18 @@ static const char dmenu_lines[]    = "8";   /* -=- */
 /* app commands */
 static const char *cmd_browser[] = { "firefox", NULL, NULL, NULL, "Firefox" };
 static const char *cmd_canto[] = { "termite", "--title", "canto", "-e", "canto-curses", NULL, NULL, NULL,  "canto" };
-static const char *cmd_cherrytree[] = { "cherrytree", NULL, NULL, NULL, "CherryTree" };
+static const char *cmd_cherrytree[] = { "cherrytree", NULL, NULL, NULL, "Cherrytree" };
+static const char *cmd_chromium[] = { "chromium", NULL, NULL, NULL, "chromium" };
 static const char *cmd_clipmenu[] = { "clipmenu", "-m", dmenumon, "-w", dmenu_width, "-lh", dmenu_lheight, "-l", dmenu_lines, "-nb", colors[7][2], "-nf", colors[7][1], "-sb", colors[8][2], "-sf", colors[8][1], "-centerx", "-centery", NULL };
 static const char *cmd_cmus[] = { "termite", "--title", "cmus", "-e", "cmus", NULL, NULL, NULL,  "cmus" };
 static const char *cmd_chrome[] = { "chromium", NULL, NULL, NULL, "Chromium" };
 static const char *cmd_deluge[] = { "deluge-gtk", NULL, NULL, NULL, "Deluge" };
 static const char *cmd_dmenu[] = { "launcher", dmenumon, "dmenu", "-m", dmenumon, "-w", dmenu_width, "-lh", dmenu_lheight, "-l", dmenu_lines, "-nb", colors[7][2], "-nf", colors[7][1], "-sb", colors[8][2], "-sf", colors[8][1], "-centerx", "-centery", NULL };
+static const char *cmd_eclipse[] = { "eclipse", NULL, NULL, NULL, "Eclipse" };
 static const char *cmd_passmenu[] = { "passmenu", "-m", dmenumon, "-w", dmenu_width, "-lh", dmenu_lheight, "-l", dmenu_lines, "-nb", colors[7][2], "-nf", colors[7][1], "-sb", colors[8][2], "-sf", colors[8][1], "-centerx", "-centery", NULL };
 static const char *cmd_sublime[] = { "subl3", NULL, NULL, NULL, "Subl3" };
 static const char *cmd_term[]  = { "termite", NULL };
+static const char *cmd_thunar[]  = { "thunar", NULL, NULL, NULL, "Thunar" };
 static const char *cmd_weechat[]  = { "termite", "--title", "weechat", "-e", "weechat", NULL, NULL, NULL,  "weechat" };
 
 /* kb commands */
@@ -232,14 +240,17 @@ static Command commands[] = {
    { "cmd_browser",     runorraise,     {.v = cmd_browser} },
    { "cmd_canto",       runorraise,     {.v = cmd_canto} },
    { "cmd_cherrytree",  runorraise,     {.v = cmd_cherrytree} },
+   { "cmd_chromium",    runorraise,     {.v = cmd_chromium} },
    { "cmd_clipmenu",    spawn,          {.v = cmd_clipmenu} },
    { "cmd_cmus",        runorraise,     {.v = cmd_cmus} },
    { "cmd_chrome",      runorraise,     {.v = cmd_chrome} },
    { "cmd_deluge",      runorraise,     {.v = cmd_deluge} },
    { "cmd_dmenu",       spawn,          {.v = cmd_dmenu} },
+   { "cmd_eclipse",     spawn,          {.v = cmd_eclipse} },
    { "cmd_passmenu",    spawn,          {.v = cmd_passmenu} },
    { "cmd_sublime",     runorraise,     {.v = cmd_sublime} },
    { "cmd_term",        spawn,          {.v = cmd_term} },
+   { "cmd_thunar",      runorraise,     {.v = cmd_thunar} },
    { "cmd_weechat",     runorraise,     {.v = cmd_weechat} },
    { "togglebar",       togglebar,      {0} },
    { "killclient",      killclient,     {0} },
