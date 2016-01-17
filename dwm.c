@@ -786,7 +786,10 @@ drawbar(Monitor *m) {
 		if(!(occ & 1 << i)){
 			drw_setscheme(drw, &scheme[6]);
 		} else {
-			drw_setscheme(drw, &scheme[(m->tagset[m->seltags] & 1 << i) ? (selmon && selmon->sel && selmon->sel->tags & 1 << i ? 2 : 1 ) : (urg & 3 << i ? 3 : 0)]);
+			drw_setscheme(drw, &scheme[
+				(m->tagset[m->seltags] & 1 << i) ? 
+					(selmon && selmon->sel && selmon->sel->tags & 1 << i ? 2 : 1 ) : 
+					(urg & 1 << i ? 3 : 0)]);
 		}
 		drw_text(drw, x, 0, w, bh, tags[i], tagpadding);
 		drw_sep(drw, x+w-1, 1, x+w-1, bh);
